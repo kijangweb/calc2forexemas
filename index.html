@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<title>Pro Multi Pair RRR & Journal Ultimate - V41 INDUK BLUEPRINT MASTER</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+:root {
+  --gold-dark: #6b5200; --gold-mid: #c7a420; --gold-light: #ffe17b;
+  --neon-blue: #00f6ff; --neon-dark: #08121b;
+  --warn-red: #ff3e3e;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; font-family:'Poppins',Segoe UI,Arial;
+  display:flex; justify-content:center; align-items:flex-start;
+  padding:20px; min-height:100vh; transition: 0.5s;
+}
+.card{ width:100%; max-width:1100px; border-radius:16px; padding:26px 28px; transition:all 0.5s ease; }
+
+/* TOAST NOTIF */
+#toast {
+  position: fixed; bottom: 20px; right: 20px; padding: 12px 24px;
+  background: #238636; color: #fff; border-radius: 8px; font-weight: 800;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5); transform: translateY(100px);
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999;
+}
+#toast.show { transform: translateY(0); }
+
+/* Navigasi */
+nav { display: flex; gap: 10px; margin-bottom: 25px; }
+nav button { 
+  flex: 1; padding: 14px; border: 2px solid rgba(128,128,128,0.3); border-radius: 10px; 
+  cursor: pointer; font-weight: 800; text-transform: uppercase;
+  background: transparent; color: inherit; transition: 0.3s;
+}
+
+/* THEME SYNC */
+body.gold{background:radial-gradient(circle at 40% 20%,#1a1504 0%,#0b0a07 100%);color:#FFFFFF;}
+body.gold .card{background:linear-gradient(145deg,#141006,#1a1609,#0b0904);border:2px solid var(--gold-mid);box-shadow:0 0 25px rgba(255,215,0,0.3);}
+body.gold nav button.active{background:var(--gold-mid); color:#000; border-color:transparent;}
+body.gold button.primary-btn{background:linear-gradient(135deg,var(--gold-mid),var(--gold-light));color:#000}
+body.gold label{color: var(--gold-light);}
+
+body.neon{background:radial-gradient(circle at top,#021220 0%,#000308 100%);color:#FFFFFF;}
+body.neon .card{background:linear-gradient(135deg,#081d33,#020910);border:1.8px solid #00f6ff;box-shadow:0 0 22px rgba(0,255,255,0.4);}
+body.neon nav button.active{background:#00f6ff; color:#000; border-color:transparent;}
+body.neon button.primary-btn{background:linear-gradient(135deg,#00f6ff,#007bff);color:#fff}
+body.neon label{color: #00f6ff;}
+
+/* RIPPLE RISK EFFECT */
+@keyframes warningRipple { 
+  0% { box-shadow: 0 0 0 0 rgba(255, 62, 62, 0.6); border-color: var(--warn-red); } 
+  70% { box-shadow: 0 0 0 12px rgba(255, 62, 62, 0); border-color: var(--warn-red); } 
+  100% { box-shadow: 0 0 0 0 rgba(255, 62, 62, 0); border-color: var(--warn-red); } 
+}
+.risk-alert { animation: warningRipple 1.2s infinite !important; color: var(--warn-red) !important; font-weight: 900 !important; border: 2px solid var(--warn-red) !important; background: rgba(255,62,62,0.1) !important; }
+
+/* Stats container */
+.stats-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 15px; }
+@media (min-width: 600px) { .stats-container { grid-template-columns: repeat(6, 1fr); } }
+.stat-item { padding: 10px 5px; border-radius: 8px; background: rgba(255,255,255,0.05); text-align: center; font-size: 9px; font-weight: 700; border-bottom: 3px solid rgba(128,128,128,0.3); }
+.stat-val { display: block; font-size: 13px; margin-top: 4px; }
+.stat-label { font-size: 8px; text-transform: uppercase; margin-top: 2px; display: block; }
+
+/* Components */
+.grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin-bottom:16px; }
+.box { display:flex; flex-direction:column; }
+label { font-size:13px; margin-bottom:5px; font-weight: 700; opacity: 0.9; }
+.form-field { padding:12px; border-radius:8px; border:1px solid rgba(128,128,128,0.5); font-size:15px; background: rgba(0,0,0,0.2); color: inherit; width: 100%; outline:none; transition: 0.3s; }
+.form-field[readonly] { background: rgba(128,128,128,0.1); border-style: dashed; }
+button.primary-btn { padding:14px; border:none; border-radius:8px; cursor:pointer; font-weight:800; width: 100%; transition: 0.3s; }
+
+/* Table & Action Buttons */
+table { width:100%; border-collapse:collapse; margin-top:15px; font-size:12px; }
+th { padding:10px; text-align:center; border-bottom: 2px solid rgba(128,128,128,0.4); opacity: 0.7; }
+td { padding:12px 8px; text-align:center; border-bottom:1px solid rgba(128,128,128,0.1); vertical-align: middle; }
+.sub-info-text { display: block; font-size: 10px; opacity: 0.6; margin-top: 2px; }
+.badge { padding:3px 7px; border-radius:4px; font-weight:800; font-size: 10px; }
+.bg-buy { background: #238636; color: #fff; }
+.bg-sell { background: #da3633; color: #fff; }
+
+.status-profit { color: #3fb950 !important; font-weight: 900; }
+.status-loss { color: #f85149 !important; font-weight: 900; }
+.status-bep { color: #388bfd !important; font-weight: 900; }
+.status-cancel { color: #8b949e !important; font-weight: 900; }
+.status-open { color: #d29922 !important; font-weight: 900; }
+
+.btn-action { background: rgba(128,128,128,0.1); border: 1px solid rgba(128,128,128,0.3); color: inherit; padding: 5px 8px; border-radius: 5px; cursor: pointer; }
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; }
+.modal-content { background: #1a1a1a; width: 280px; border-radius: 12px; border: 1px solid #444; overflow: hidden; }
+.modal-content button.menu-opt { display: block; width: 100%; padding: 15px; border: none; background: none; color: white; font-weight: 700; cursor: pointer; border-bottom: 1px solid #333; text-align: center; }
+
+/* STATE MGMT UI */
+.state-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+.btn-state { flex: 1; min-width: 100px; padding: 10px; font-size: 10px; font-weight: 800; border-radius: 6px; cursor: pointer; border: 1px solid rgba(128,128,128,0.3); background: rgba(128,128,128,0.1); color: inherit; }
+.btn-share-main { background: linear-gradient(135deg, #007bff, #00f6ff) !important; color: #fff !important; border: none !important; }
+</style>
+</head>
+<body class="gold">
+
+<div id="toast">Pesan Terkirim! 📓</div>
+
+<div class="card">
+  <nav>
+    <button id="btnTabCalc" class="active">Kalkulator</button>
+    <button id="btnTabJournal">Jurnal Trading</button>
+  </nav>
+
+  <div id="sectionCalc">
+    <h1>RRR Calculator</h1>
+    <select id="theme" class="form-field" style="margin-bottom:20px; font-weight: 900;">
+      <option value="gold">Gold Luxury</option>
+      <option value="neon">Blue Neon</option>
+    </select>
+
+    <div class="grid-2">
+      <div class="box"><label>Pair Selection</label>
+        <select id="pair" class="form-field">
+          <optgroup label="Grup 2"><option value="AUDUSD">AUDUSD</option><option value="EURGBP">EURGBP</option><option value="NZDUSD">NZDUSD</option><option value="USDCHF">USDCHF</option></optgroup>
+          <optgroup label="Grup 1.5"><option value="AUDJPY">AUDJPY</option><option value="CADJPY">CADJPY</option><option value="EURUSD">EURUSD</option><option value="GBPUSD">GBPUSD</option><option value="NZDJPY">NZDJPY</option><option value="USDCAD">USDCAD</option></optgroup>
+          <optgroup label="Grup 1"><option value="CHFJPY">CHFJPY</option><option value="EURJPY">EURJPY</option><option value="EURNZD">EURNZD</option><option value="GBPJPY">GBPJPY</option><option value="USDJPY">USDJPY</option></optgroup>
+          <optgroup label="Default"><option value="XAUUSD" selected>XAUUSD</option></optgroup>
+        </select>
+      </div>
+      <div class="box"><label>RRR Multiplier</label><input id="rrr" class="form-field" type="number" step="0.1" value="1" min="1"></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="box"><label>Entry Price</label><input id="op" class="form-field" type="text" inputmode="decimal"></div>
+      <div class="box"><label>Take Profit (TP)</label><input id="tp" class="form-field" readonly></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="box"><label>TP Pips Plan</label><input id="tpPips" class="form-field" type="number"></div>
+      <div class="box"><label id="slLabel">Stop Loss (SL) Info</label><input id="slInfo" class="form-field" readonly></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="box"><label>Kadaluarsa (Jam)</label><input id="customExpiry" class="form-field" type="number" value="7" min="1"></div>
+      <div class="box"><label>Side</label><select id="position" class="form-field"><option value="buy">🟢 BUY</option><option value="sell">🔴 SELL</option></select></div>
+    </div>
+
+    <button id="saveBtn" class="primary-btn" style="margin-top:10px;">SAVE TO JOURNAL & COPY SIGNAL</button>
+
+    <table>
+      <thead><tr><th>Pair</th><th>Side</th><th>Entry</th><th>TP</th><th>Pips</th><th>RRR</th></tr></thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <div id="sectionJournal" style="display:none;">
+    <h1>Journal History</h1>
+    <div class="filter-container" style="display:flex; flex-direction:column; gap:10px; margin-bottom:15px; padding:15px; background:rgba(128,128,128,0.1); border-radius:10px;">
+      
+      <div class="stats-container">
+        <div class="stat-item">SIGNAL<span id="statSignal" class="stat-val">0</span></div>
+        <div class="stat-item color-profit">PROFIT<span id="statProfit" class="stat-val">0</span></div>
+        <div class="stat-item color-loss">LOSS<span id="statLoss" class="stat-val">0</span></div>
+        <div class="stat-item color-winrate">WINRATE<span id="statWinrate" class="stat-val">0%</span></div>
+        <div class="stat-item color-pf">PF<span id="statPF" class="stat-val">0.0</span><span id="statPFLabel" class="stat-label">-</span></div>
+        <div class="stat-item">NET PIPS<span id="statNet" class="stat-val">0</span></div>
+      </div>
+
+      <div style="display:flex; gap:10px;">
+        <div style="flex:1"><label>Bulan:</label><select id="filterMonth" class="form-field">
+          <option value="all">Semua Bulan</option><option value="0">Januari</option><option value="1">Februari</option><option value="2">Maret</option><option value="3">April</option><option value="4">Mei</option><option value="5">Juni</option><option value="6">Juli</option><option value="7">Agustus</option><option value="8">September</option><option value="9">Oktober</option><option value="10">November</option><option value="11">Desember</option>
+        </select></div>
+        <div style="flex:1"><label>Tahun:</label><select id="filterYear" class="form-field"><option value="all">Semua Tahun</option></select></div>
+      </div>
+
+      <div class="state-actions">
+        <button class="btn-state btn-share-main" onclick="shareSummary()">📢 SHARE SUMMARY</button>
+        <button class="btn-state" onclick="exportData()">💾 DOWNLOAD JSON</button>
+        <button class="btn-state" onclick="triggerImport()">📂 IMPORT JSON</button>
+        <button class="btn-state" style="background:#da3633; color:#fff;" onclick="deleteFilteredData()">🗑️ HAPUS FILTER</button>
+      </div>
+      <input type="file" id="importInput" style="display:none" accept=".json">
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table id="journalTable">
+        <thead><tr><th>Trade ID / Waktu</th><th>Pair / Entry</th><th>Side</th><th>RRR (Plan)</th><th>Status / Pips</th><th>Opsi</th></tr></thead>
+        <tbody id="journalBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="statusModal" class="modal-overlay">
+  <div class="modal-content">
+    <button class="menu-opt" onclick="updateJournalStatus('PROFIT')" style="color:#3fb950">WIN / PROFIT</button>
+    <button class="menu-opt" onclick="updateJournalStatus('LOSS')" style="color:#f85149">LOSS / CUTLOSS</button>
+    <button class="menu-opt" onclick="updateJournalStatus('BEP')" style="color:#388bfd">BEP / SL+</button>
+    <button class="menu-opt" onclick="updateJournalStatus('CANCEL')" style="color:#8b949e">CANCEL / EXPIRED</button>
+    <button class="menu-opt" onclick="deleteJournalItem()" style="color:#f85149; font-weight:800;">HAPUS PERMANEN</button>
+    <button class="menu-opt" onclick="closeModal()" style="color:#fff; background:#333">TUTUP</button>
+  </div>
+</div>
+
+<script>
+// INDUK DATA STORAGE
+let journal = JSON.parse(localStorage.getItem('rr-ultimate-final-storage')) || [];
+let currentId = null;
+
+// NOTIFICATION LOGIC
+function showToast(msg = "Signal Copied! 📓") {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// SHARE PERFORMANCE SUMMARY (V41 FULL QUALITY)
+window.shareSummary = function() {
+    const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    const now = new Date();
+    const fM = document.getElementById('filterMonth').value;
+    const fY = document.getElementById('filterYear').value;
+    let labelDate = (fM === 'all') ? `${monthNames[now.getMonth()]} ${now.getFullYear()}` : `${monthNames[fM]} ${fY}`;
+
+    const filtered = journal.filter(t => {
+        const d = new Date(t.rawDate);
+        return (fM === 'all' || d.getMonth().toString() === fM) && (fY === 'all' || d.getFullYear().toString() === fY);
+    });
+    
+    let winP = 0, lossP = 0;
+    filtered.forEach(t => {
+        if(t.status==='PROFIT') winP += parseFloat(t.rewardPips);
+        if(t.status==='LOSS') lossP += parseFloat(t.riskPips);
+    });
+
+    const text = `📊 TRADING PERFORMANCE SUMMARY
+Periode: ${labelDate}
+----------------------------
+SIGNAL: ${document.getElementById('statSignal').innerText}
+PROFIT: ${document.getElementById('statProfit').innerText}
+LOSS: ${document.getElementById('statLoss').innerText}
+WINRATE: ${document.getElementById('statWinrate').innerText}
+PF: ${document.getElementById('statPF').innerText} [${document.getElementById('statPFLabel').innerText}]
+PROFIT PIPS: +${winP.toFixed(1)}
+RISK PIPS: -${lossP.toFixed(1)}
+NET PIPS: ${document.getElementById('statNet').innerText}
+----------------------------
+Generated by FOREXEMAS V4.1`;
+
+    navigator.clipboard.writeText(text).then(() => showToast("Summary Copied! 📢"));
+};
+
+// STATE MANAGEMENT
+window.exportData = function() {
+    if(journal.length === 0) return alert("Belum ada data.");
+    const blob = new Blob([JSON.stringify(journal, null, 2)], { type: "application/json" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `Backup_Jurnal_${new Date().toLocaleDateString('id-ID')}.json`;
+    link.click(); showToast("Data Downloaded! 💾");
+};
+window.triggerImport = function() { document.getElementById('importInput').click(); };
+
+// GLOBAL CONTROL FUNCTIONS
+window.copyJournalRow = function(id) {
+    const t = journal.find(item => item.id == id);
+    if (!t) return;
+    let res = (t.status === 'PROFIT') ? "Profit 🟢" : (t.status === 'LOSS') ? "Loss 🔴" : (t.status === 'BEP') ? "BEP / SL+ 🔵" : (t.status === 'CANCEL') ? "Cancelled ⚪" : "Open 🟡";
+    const shareText = `📓 TRADE [${t.tradeId}]\nPair: ${t.pair} (${t.pos})\nEntry: ${t.op}\nSL: ${t.sl} (-${t.riskPips})\nTP: ${t.tp} (+${t.rewardPips})\nRRR: 1:${t.rrr}\n----------------------\nTerbit: ${t.dateDisplay}\nExpired: ${t.expiryDisplay} (${t.expiryHrs}h)\nHasil: ${res}`;
+    navigator.clipboard.writeText(shareText).then(() => showToast());
+};
+
+window.openModal = function(id) { currentId = id; document.getElementById('statusModal').style.display = 'flex'; };
+window.closeModal = function() { document.getElementById('statusModal').style.display = 'none'; };
+window.updateJournalStatus = function(s) {
+    journal = journal.map(t => t.id == currentId ? {...t, status: s} : t);
+    localStorage.setItem('rr-ultimate-final-storage', JSON.stringify(journal));
+    window.renderJournal(); window.closeModal();
+};
+window.deleteJournalItem = function() {
+    if (confirm('Hapus trade ini?')) {
+        journal = journal.filter(t => t.id != currentId);
+        localStorage.setItem('rr-ultimate-final-storage', JSON.stringify(journal));
+        window.renderJournal(); window.closeModal();
+    }
+};
+window.deleteFilteredData = function() {
+    if (confirm('Hapus data terfilter?')) {
+        const fM = document.getElementById('filterMonth').value, fY = document.getElementById('filterYear').value;
+        journal = journal.filter(t => { const d = new Date(t.rawDate); return !((fM === 'all' || d.getMonth().toString() === fM) && (fY === 'all' || d.getFullYear().toString() === fY)); });
+        localStorage.setItem('rr-ultimate-final-storage', JSON.stringify(journal));
+        window.renderJournal();
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const DUMMY = { AUDUSD:0.666, EURGBP:0.8695, NZDUSD:0.6205, USDCHF:0.915, AUDJPY:99.2, CADJPY:110.45, EURUSD:1.0865, GBPUSD:1.263, NZDJPY:93.15, USDCAD:1.336, CHFJPY:136.5, EURJPY:162.5, EURNZD:1.688, GBPJPY:188.5, USDJPY:149.8, XAUUSD:2641.99 };
+    const DEFAULT_PIPS = { AUDUSD:200, EURGBP:200, NZDUSD:200, USDCHF:200, AUDJPY:300, CADJPY:300, EURUSD:300, GBPUSD:300, NZDJPY:300, USDCAD:300, CHFJPY:400, EURJPY:400, EURNZD:400, GBPJPY:400, USDJPY:400, XAUUSD:500 };
+
+    const el = {
+        theme: document.getElementById('theme'), pair: document.getElementById('pair'), op: document.getElementById('op'), tp: document.getElementById('tp'),
+        tpPips: document.getElementById('tpPips'), rrr: document.getElementById('rrr'), customExpiry: document.getElementById('customExpiry'),
+        position: document.getElementById('position'), slInfo: document.getElementById('slInfo'), slLabel: document.getElementById('slLabel'),
+        tableBody: document.getElementById('tableBody'), journalBody: document.getElementById('journalBody'),
+        btnTabCalc: document.getElementById('btnTabCalc'), btnTabJournal: document.getElementById('btnTabJournal'),
+        sectionCalc: document.getElementById('sectionCalc'), sectionJournal: document.getElementById('sectionJournal'),
+        filterMonth: document.getElementById('filterMonth'), filterYear: document.getElementById('filterYear'),
+        statSignal: document.getElementById('statSignal'), statProfit: document.getElementById('statProfit'),
+        statLoss: document.getElementById('statLoss'), statWinrate: document.getElementById('statWinrate'),
+        statPF: document.getElementById('statPF'), statPFLabel: document.getElementById('statPFLabel'),
+        statNet: document.getElementById('statNet'), saveBtn: document.getElementById('saveBtn'), importInput: document.getElementById('importInput')
+    };
+
+    function getPipVal(p) { return p === 'XAUUSD' ? 0.1 : p.includes('JPY') ? 0.01 : 0.0001; }
+    function getDec(p) { return (p === 'XAUUSD' || p.includes('JPY')) ? 2 : 5; }
+    function formatF(n, d) { return isNaN(n) ? '' : n.toFixed(d).replace('.', ','); }
+
+    function updateAll() {
+        const pr = el.pair.value, pv = getPipVal(pr), d = getDec(pr);
+        let OP = parseFloat(el.op.value.replace(',', '.')) || DUMMY[pr];
+        const mult = Math.max(1, parseFloat(el.rrr.value) || 1);
+        const pips = parseFloat(el.tpPips.value) || DEFAULT_PIPS[pr];
+        const TP = el.position.value === 'buy' ? OP + (pips * pv) : OP - (pips * pv);
+        const riskPips = pips / mult;
+        const SL = el.position.value === 'buy' ? OP - (riskPips * pv) : OP + (riskPips * pv);
+        el.tp.value = formatF(TP, d);
+        el.slInfo.value = `SL: ${formatF(SL, d)} | Risk: ${riskPips.toFixed(1)} pips`;
+        if (riskPips < 35) el.slInfo.classList.add('risk-alert');
+        else el.slInfo.classList.remove('risk-alert');
+        el.tableBody.innerHTML = `<tr><td>${pr}</td><td><span class="badge ${el.position.value === 'buy' ? 'bg-buy' : 'bg-sell'}">${el.position.value.toUpperCase()}</span></td><td>${formatF(OP, d)}</td><td>${formatF(TP, d)}</td><td>+${pips}</td><td>x${mult}</td></tr>`;
+    }
+
+    // WINRATE LOGIC: Win / (Win + Loss + BEP)
+    window.renderJournal = function() {
+        const fM = el.filterMonth.value, fY = el.filterYear.value;
+        const filtered = journal.filter(t => { const d = new Date(t.rawDate); return (fM === 'all' || d.getMonth().toString() === fM) && (fY === 'all' || d.getFullYear().toString() === fY); });
+        const wins = filtered.filter(t => t.status === 'PROFIT'), losses = filtered.filter(t => t.status === 'LOSS'), beps = filtered.filter(t => t.status === 'BEP');
+        const totalCalc = wins.length + losses.length + beps.length;
+        const wr = totalCalc > 0 ? ((wins.length / totalCalc) * 100).toFixed(1) : 0;
+        let winP = 0, lossP = 0; wins.forEach(w => winP += parseFloat(w.rewardPips)); losses.forEach(l => lossP += parseFloat(l.riskPips));
+        const pfVal = lossP > 0 ? (winP / lossP) : (winP > 0 ? 9.9 : 0);
+        let pfLabel = totalCalc === 0 ? "NO DATA" : (pfVal >= 2.0 ? "SANGAT SEHAT" : (pfVal >= 1.5 ? "SEHAT" : (pfVal >= 1.0 ? "WASPADA" : "BURUK")));
+        let pfColor = pfVal >= 1.5 ? "#3fb950" : (pfVal >= 1.0 ? "#d29922" : "#f85149");
+
+        el.statSignal.textContent = filtered.length; el.statProfit.textContent = wins.length;
+        el.statLoss.textContent = losses.length; el.statWinrate.textContent = wr + '%';
+        el.statPF.textContent = (lossP === 0 && winP > 0) ? "MAX" : pfVal.toFixed(2);
+        el.statPFLabel.textContent = pfLabel; el.statPFLabel.style.color = pfColor;
+        el.statNet.textContent = (winP - lossP).toFixed(1);
+
+        el.journalBody.innerHTML = filtered.map(t => {
+            const isEx = (t.status === 'BEP' || t.status === 'CANCEL');
+            return `<tr><td><b>${t.tradeId}</b><span class="sub-info-text">${t.dateDisplay}</span></td>
+                <td><b>${t.pair}</b><span class="sub-info-text">OP: ${t.op}</span></td>
+                <td><span class="badge ${t.pos === 'BUY' ? 'bg-buy' : 'bg-sell'}">${t.pos}</span></td>
+                <td><b>1:${t.rrr}</b><span class="sub-info-text">SL: ${t.sl} (-${t.riskPips})</span></td>
+                <td class="status-${t.status.toLowerCase()}"><b>${t.status}</b><span class="sub-info-text">TP: ${t.tp} (${isEx ? '-' : '+' + t.rewardPips})</span></td>
+                <td><button class="btn-action" onclick="copyJournalRow('${t.id}')">📋</button> <button class="btn-action" onclick="openModal('${t.id}')">⚙️</button></td></tr>`;
+        }).join('');
+    };
+
+    el.importInput.onchange = (e) => {
+        const file = e.target.files[0]; if(!file) return;
+        const reader = new FileReader(); reader.onload = (event) => {
+            try { const imported = JSON.parse(event.target.result); if(Array.isArray(imported)) { journal = imported; localStorage.setItem('rr-ultimate-final-storage', JSON.stringify(journal)); populateYears(); renderJournal(); showToast("Data Imported! 📂"); } } catch(err) { alert("Invalid JSON."); }
+        }; reader.readAsText(file);
+    };
+
+    function populateYears() { const yrs = [...new Set(journal.map(t => new Date(t.rawDate).getFullYear()))]; el.filterYear.innerHTML = '<option value="all">Semua Tahun</option>' + yrs.map(y => `<option value="${y}">${y}</option>`).join(''); }
+    el.btnTabCalc.onclick = () => { el.sectionCalc.style.display = 'block'; el.sectionJournal.style.display = 'none'; el.btnTabCalc.classList.add('active'); el.btnTabJournal.classList.remove('active'); };
+    el.btnTabJournal.onclick = () => { el.sectionCalc.style.display = 'none'; el.sectionJournal.style.display = 'block'; el.btnTabJournal.classList.add('active'); el.btnTabCalc.classList.remove('active'); populateYears(); renderJournal(); };
+
+    el.saveBtn.onclick = () => {
+        const mult = Math.max(1, parseFloat(el.rrr.value) || 1), pips = parseFloat(el.tpPips.value) || DEFAULT_PIPS[el.pair.value];
+        const now = new Date(), fmt = { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit' };
+        const entry = { id: Date.now(), tradeId: "TRX-" + Math.floor(100000 + Math.random() * 900000), rawDate: now.toISOString(), dateDisplay: now.toLocaleString('id-ID', fmt), expiryDisplay: new Date(now.getTime() + (parseInt(el.customExpiry.value)*3600000)).toLocaleString('id-ID', fmt), expiryHrs: el.customExpiry.value, pair: el.pair.value, pos: el.position.value.toUpperCase(), rrr: mult, op: el.op.value, tp: el.tp.value, sl: el.slInfo.value.split('|')[0].replace('SL:','').trim(), rewardPips: pips, riskPips: (pips/mult).toFixed(1), status: 'OPEN' };
+        journal.unshift(entry); localStorage.setItem('rr-ultimate-final-storage', JSON.stringify(journal));
+        window.copyJournalRow(entry.id); el.saveBtn.textContent = 'SAVED & COPIED!'; setTimeout(() => el.saveBtn.textContent = 'SAVE TO JOURNAL & COPY SIGNAL', 1500);
+        populateYears(); if(el.sectionJournal.style.display === 'block') window.renderJournal();
+    };
+
+    el.theme.onchange = () => { document.body.className = el.theme.value; };
+    el.pair.onchange = () => { el.op.value = formatF(DUMMY[el.pair.value], getDec(el.pair.value)); updateAll(); };
+    [el.op, el.tpPips, el.rrr, el.position, el.filterMonth, el.filterYear].forEach(i => { if (i) i.oninput = () => { if (i.id.startsWith('filter')) window.renderJournal(); else updateAll(); }; });
+    el.op.value = "2641,99"; el.tpPips.value = 500; updateAll();
+});
+</script>
+</body>
+</html>
