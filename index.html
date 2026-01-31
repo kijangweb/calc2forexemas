@@ -10,97 +10,66 @@
   --neon-blue: #00f6ff; --neon-dark: #08121b; --warn-red: #ff3e3e;
   --bg-input: rgba(0,0,0,0.5);
 }
-
 * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+body { margin: 0; font-family: 'Poppins', sans-serif; line-height: 1.3; padding: 10px; min-height: 100vh; transition: 0.5s; }
+.card { width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 20px; padding: 15px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
 
-body {
-  margin: 0; font-family: 'Poppins', sans-serif;
-  line-height: 1.4; padding: 12px; min-height: 100vh;
-  transition: 0.5s;
-}
+.theme-switcher { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px; }
+.theme-btn { padding: 10px; border-radius: 10px; border: 1px solid rgba(128,128,128,0.3); cursor: pointer; font-weight: 800; font-size: 9px; text-transform: uppercase; background: rgba(0,0,0,0.2); color: inherit; transition: 0.3s; }
 
-.card { 
-  width: 100%; max-width: 1100px; margin: 0 auto;
-  border-radius: 24px; padding: 22px; 
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-}
-
-/* Theme Switcher */
-.theme-switcher { display: flex; gap: 8px; margin-bottom: 20px; }
-.theme-btn {
-  flex: 1; padding: 12px; border-radius: 12px; border: 1px solid rgba(128,128,128,0.3);
-  cursor: pointer; font-weight: 800; font-size: 10px; text-transform: uppercase;
-  background: rgba(0,0,0,0.2); color: inherit; transition: 0.3s;
-}
-
-nav { display: flex; gap: 8px; margin-bottom: 25px; }
-nav button {  
-  flex: 1; padding: 14px; border-radius: 12px; border: 1px solid rgba(128,128,128,0.2);
-  cursor: pointer; font-weight: 800; text-transform: uppercase;
-  background: transparent; color: inherit; font-size: 11px; transition: 0.3s;
-}
+nav { display: flex; gap: 6px; margin-bottom: 20px; }
+nav button { flex: 1; padding: 12px 5px; border-radius: 10px; border: 1px solid rgba(128,128,128,0.2); cursor: pointer; font-weight: 800; text-transform: uppercase; background: transparent; color: inherit; font-size: 10px; transition: 0.3s; }
 
 body.gold { background: #0b0a07; color: #fff; }
-body.gold .card { background: #141108; border: 2px solid var(--gold-mid); }
+body.gold .card { background: #141108; border: 1.5px solid var(--gold-mid); }
 body.gold nav button.active { background: var(--gold-mid); color: #000; border: none; }
 body.gold .theme-btn.active { border-color: var(--gold-mid); background: rgba(200,164,32,0.15); color: var(--gold-light); }
 body.gold label { color: var(--gold-light); }
 
 body.neon { background: #01080e; color: #fff; }
-body.neon .card { background: #05111b; border: 1.8px solid var(--neon-blue); }
+body.neon .card { background: #05111b; border: 1.5px solid var(--neon-blue); }
 body.neon nav button.active { background: var(--neon-blue); color: #000; border: none; }
 body.neon .theme-btn.active { border-color: var(--neon-blue); background: rgba(0,246,255,0.15); color: var(--neon-blue); }
 body.neon label { color: var(--neon-blue); }
 
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
-.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
 
-@media (max-width: 600px) {
-  .grid-2, .grid-3 { grid-template-columns: 1fr; }
-}
+@media (max-width: 600px) { h1 { font-size: 1.1rem; } .form-field { font-size: 13px; padding: 10px; } label { font-size: 9px; } }
 
 .box { display: flex; flex-direction: column; }
-label { font-size: 10px; margin-bottom: 5px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
-.form-field { 
-  padding: 14px; border-radius: 12px; border: 1px solid rgba(128,128,128,0.3); 
-  font-size: 15px; background: var(--bg-input); color: inherit; width: 100%;
-}
+label { font-size: 9px; margin-bottom: 4px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; }
+.form-field { padding: 12px; border-radius: 10px; border: 1px solid rgba(128,128,128,0.3); font-size: 14px; background: var(--bg-input); color: inherit; width: 100%; }
 .form-field[readonly] { background: rgba(128,128,128,0.1); border-style: dashed; }
 
-.primary-btn { 
-  padding: 16px; border: none; border-radius: 14px; cursor: pointer; 
-  font-weight: 800; font-size: 11px; text-transform: uppercase; transition: 0.3s;
-}
+.primary-btn { padding: 14px; border: none; border-radius: 12px; cursor: pointer; font-weight: 800; font-size: 10px; text-transform: uppercase; transition: 0.3s; }
 
-.stats-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 15px; scrollbar-width: none; }
-.stat-item { min-width: 90px; flex: 1; padding: 12px 6px; border-radius: 14px; background: rgba(255,255,255,0.05); text-align: center; border-bottom: 3px solid rgba(128,128,128,0.3); }
-.stat-val { display: block; font-size: 15px; font-weight: 900; }
-.stat-label { font-size: 8px; opacity: 0.6; text-transform: uppercase; font-weight: 700; }
+.stats-container { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; scrollbar-width: none; }
+.stat-item { min-width: 80px; flex: 1; padding: 10px 5px; border-radius: 12px; background: rgba(255,255,255,0.05); text-align: center; border-bottom: 2.5px solid rgba(128,128,128,0.3); }
+.stat-val { display: block; font-size: 13px; font-weight: 900; }
+.stat-label { font-size: 7px; opacity: 0.6; text-transform: uppercase; font-weight: 700; }
 
-.table-wrapper { overflow-x: auto; border-radius: 14px; background: rgba(0,0,0,0.2); }
-table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 800px; }
-th { padding: 14px 10px; border-bottom: 2px solid rgba(128,128,128,0.2); opacity: 0.7; }
-td { padding: 12px 8px; border-bottom: 1px solid rgba(128,128,128,0.05); text-align: center; }
+.table-wrapper { overflow-x: auto; border-radius: 12px; background: rgba(0,0,0,0.2); }
+table { width: 100%; border-collapse: collapse; font-size: 10px; min-width: 750px; }
+th { padding: 12px 8px; border-bottom: 2px solid rgba(128,128,128,0.2); opacity: 0.7; }
+td { padding: 10px 5px; border-bottom: 1px solid rgba(128,128,128,0.05); text-align: center; }
 
 .status-profit { color: #3fb950 !important; }
 .status-loss { color: #f85149 !important; }
-.badge { padding: 4px 8px; border-radius: 6px; font-weight: 900; }
+.badge { padding: 3px 6px; border-radius: 4px; font-weight: 900; }
 .bg-buy { background: #238636; color: #fff; }
 .bg-sell { background: #da3633; color: #fff; }
 
-.full-date { font-size: 9px; opacity: 0.6; display: block; margin-top: 4px; line-height: 1.2; }
+.full-date { font-size: 8px; opacity: 0.5; display: block; margin-top: 3px; }
 
-#toast {
-  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(150px);
-  padding: 14px 30px; background: #238636; border-radius: 50px; z-index: 9999; transition: 0.4s; font-weight: 800;
-}
+#toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(150px); padding: 12px 25px; background: #238636; border-radius: 50px; z-index: 9999; transition: 0.4s; font-weight: 800; font-size: 12px; }
 #toast.show { transform: translateX(-50%) translateY(0); }
 
-#openWarning { background: rgba(255, 62, 62, 0.15); border: 1px solid var(--warn-red); color: #ff8e8e; padding: 12px; border-radius: 12px; font-size: 11px; font-weight: 700; margin-bottom: 20px; text-align: center; display: none; }
+#openWarning { background: rgba(255, 62, 62, 0.12); border: 1px solid var(--warn-red); color: #ff8e8e; padding: 10px; border-radius: 10px; font-size: 10px; font-weight: 700; margin-bottom: 15px; text-align: center; display: none; }
 
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
-.modal-content { background: #111; width: 320px; border-radius: 24px; border: 1px solid #333; overflow: hidden; }
-.menu-opt { display: block; width: 100%; padding: 20px; border: none; background: none; color: white; font-weight: 700; cursor: pointer; border-bottom: 1px solid #222; }
+.modal-content { background: #111; width: 300px; border-radius: 24px; border: 1px solid #333; overflow: hidden; }
+.menu-opt { display: block; width: 100%; padding: 18px; border: none; background: none; color: white; font-weight: 700; cursor: pointer; border-bottom: 1px solid #222; }
 </style>
 </head>
 <body class="gold">
@@ -114,8 +83,8 @@ td { padding: 12px 8px; border-bottom: 1px solid rgba(128,128,128,0.05); text-al
   </div>
 
   <nav>
-    <button id="btnTabCalc" class="active">Kalkulator V41</button>
-    <button id="btnTabJournal">Database Jurnal</button>
+    <button id="btnTabCalc" class="active">Kalkulator</button>
+    <button id="btnTabJournal">Jurnal</button>
   </nav>
 
   <div id="sectionCalc">
@@ -132,24 +101,24 @@ td { padding: 12px 8px; border-bottom: 1px solid rgba(128,128,128,0.05); text-al
           <optgroup label="Default"><option value="XAUUSD" selected>XAUUSD</option></optgroup>
         </select>
       </div>
-      <div class="box"><label>Entry Price</label><input id="op" class="form-field" type="text" value="5000,00" placeholder="Contoh: 5000.00"></div>
-      <div class="box"><label>RRR Multiplier (1:X)</label><input id="rrr" class="form-field" type="number" step="0.1" value="1"></div>
-      <div class="box"><label>Stop Loss (SL)</label><input id="slInfo" class="form-field" readonly></div>
-      <div class="box"><label>Take Profit (TP)</label><input id="tp" class="form-field" readonly></div>
+      <div class="box"><label>Entry Price</label><input id="op" class="form-field" type="text" value="5000,00"></div>
+      <div class="box"><label>RRR Ratio</label><input id="rrr" class="form-field" type="number" step="0.1" value="1"></div>
+      <div class="box"><label>Stop Loss</label><input id="slInfo" class="form-field" readonly></div>
+      <div class="box"><label>Take Profit</label><input id="tp" class="form-field" readonly></div>
       <div class="box"><label>TP Pips Plan</label><input id="tpPips" class="form-field" type="number" value="500"></div>
       <div class="box"><label>Side</label>
         <select id="position" class="form-field"><option value="buy">🟢 BUY</option><option value="sell">🔴 SELL</option></select>
       </div>
-      <div class="box"><label>Entry Reason</label><input id="entryReason" class="form-field" type="text" placeholder="EMA / S&R"></div>
+      <div class="box"><label>Alasan Entry</label><input id="entryReason" class="form-field" type="text" placeholder="EMA / SnR"></div>
       <div class="box"><label>Expired (Jam)</label><input id="customExpiry" class="form-field" type="number" value="2"></div>
     </div>
 
-    <div style="display:flex; gap:12px; margin-top:20px;">
+    <div style="display:flex; gap:10px; margin-top:15px;">
         <button id="copyOnlyBtn" class="primary-btn" style="background:#333; color:#fff; flex:1">COPY CAPTION</button>
-        <button id="saveJournalBtn" class="primary-btn" style="flex:1.3; background:linear-gradient(135deg,var(--gold-mid),var(--gold-light)); color:#000;">SIMPAN JURNAL</button>
+        <button id="saveJournalBtn" class="primary-btn" style="flex:1.2; background:linear-gradient(135deg,var(--gold-mid),var(--gold-light)); color:#000;">SAVE JURNAL</button>
     </div>
 
-    <div class="table-wrapper" style="margin-top:25px;">
+    <div class="table-wrapper" style="margin-top:20px;">
         <table>
           <thead><tr><th>Pair</th><th>Side</th><th>Entry</th><th>SL</th><th>TP</th><th>Ratio</th></tr></thead>
           <tbody id="previewBody"></tbody>
@@ -159,7 +128,7 @@ td { padding: 12px 8px; border-bottom: 1px solid rgba(128,128,128,0.05); text-al
 
   <div id="sectionJournal" style="display:none;">
     <h1>Performance History</h1>
-    <div id="openWarning">⚠️ ADA POSISI OPEN! SELESAIKAN STATUS UNTUK REPORT.</div>
+    <div id="openWarning">⚠️ ADA POSISI OPEN! SELESAIKAN UNTUK REPORT.</div>
 
     <div class="stats-container">
       <div class="stat-item"><span id="statSignal" class="stat-val">0</span><span class="stat-label">Signal</span></div>
@@ -171,22 +140,22 @@ td { padding: 12px 8px; border-bottom: 1px solid rgba(128,128,128,0.05); text-al
       <div class="stat-item"><span id="statNet" class="stat-val">0</span><span class="stat-label">Net Pips</span></div>
     </div>
 
-    <div class="grid-3" style="background:rgba(128,128,128,0.1); padding:15px; border-radius:18px;">
-      <div class="box"><label>Filter Tgl</label><select id="filterDay" class="form-field" onchange="window.renderJournal()"></select></div>
+    <div class="grid-3" style="background:rgba(128,128,128,0.1); padding:10px; border-radius:12px;">
+      <div class="box"><label>Tgl</label><select id="filterDay" class="form-field" onchange="window.renderJournal()"></select></div>
       <div class="box"><label>Bulan</label><select id="filterMonth" class="form-field" onchange="window.updateDayOptions(); window.renderJournal()"><option value="0">Jan</option><option value="1">Feb</option><option value="2">Mar</option><option value="3">Apr</option><option value="4">Mei</option><option value="5">Jun</option><option value="6">Jul</option><option value="7">Agu</option><option value="8">Sep</option><option value="9">Okt</option><option value="10">Nov</option><option value="11">Des</option></select></div>
       <div class="box"><label>Tahun</label><select id="filterYear" class="form-field" onchange="window.renderJournal()"></select></div>
     </div>
 
-    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin: 15px 0;">
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin: 12px 0;">
       <button id="btnShareDaily" class="primary-btn" style="grid-column: span 2; background:#007bff; color:#fff;" onclick="shareDailySummary()">📢 SHARE DAILY REPORT</button>
-      <button class="primary-btn" style="background:#444; color:#fff; font-size:10px" onclick="exportData()">💾 EXPORT</button>
-      <button class="primary-btn" style="background:#444; color:#fff; font-size:10px" onclick="triggerImport()">📂 IMPORT</button>
+      <button class="primary-btn" style="background:#444; color:#fff; font-size:9px" onclick="exportData()">💾 EXPORT</button>
+      <button class="primary-btn" style="background:#444; color:#fff; font-size:9px" onclick="triggerImport()">📂 IMPORT</button>
       <button class="primary-btn" style="grid-column: span 2; background:#da3633; color:#fff;" onclick="deleteFiltered()">🗑️ RESET TERFILTER</button>
     </div>
 
     <div class="table-wrapper">
       <table>
-        <thead><tr><th>Trade ID / Terbit</th><th>Pair / OP</th><th>Side</th><th>Ratio (P/L)</th><th>Kadaluarsa</th><th>Status</th><th>Aksi</th></tr></thead>
+        <thead><tr><th>Trade ID / Waktu</th><th>Pair / OP</th><th>Side</th><th>Ratio (P/L)</th><th>Kadaluarsa</th><th>Status</th><th>Aksi</th></tr></thead>
         <tbody id="journalBody"></tbody>
       </table>
     </div>
@@ -207,12 +176,12 @@ td { padding: 12px 8px; border-bottom: 1px solid rgba(128,128,128,0.05); text-al
 <input type="file" id="importInput" style="display:none" onchange="handleImport(event)">
 
 <script>
-const BLUEPRINT_DEFAULTS = { XAUUSD: { p: 2641.99, pips: 500 }, EURUSD: { p: 1.0850, pips: 300 }, GBPUSD: { p: 1.2650, pips: 300 }, USDJPY: { p: 150.00, pips: 400 }, AUDUSD: { p: 0.6550, pips: 200 }, EURGBP: { p: 0.8550, pips: 200 }, NZDUSD: { p: 0.6150, pips: 200 }, USDCHF: { p: 0.8850, pips: 200 }, AUDJPY: { p: 98.50, pips: 300 }, CADJPY: { p: 110.00, pips: 300 }, NZDJPY: { p: 91.50, pips: 300 }, USDCAD: { p: 1.3550, pips: 300 }, CHFJPY: { p: 170.00, pips: 400 }, EURJPY: { p: 162.50, pips: 400 }, GBPJPY: { p: 190.00, pips: 400 }, EURNZD: { p: 1.7850, pips: 400 } };
+const BLUEPRINT_DEFAULTS = { XAUUSD: { p: 5000.00, pips: 500 }, EURUSD: { p: 1.0850, pips: 300 }, GBPUSD: { p: 1.2650, pips: 300 }, USDJPY: { p: 150.00, pips: 400 }, AUDUSD: { p: 0.6550, pips: 200 }, EURGBP: { p: 0.8550, pips: 200 }, NZDUSD: { p: 0.6150, pips: 200 }, USDCHF: { p: 0.8850, pips: 200 }, AUDJPY: { p: 98.50, pips: 300 }, CADJPY: { p: 110.00, pips: 300 }, NZDJPY: { p: 91.50, pips: 300 }, USDCAD: { p: 1.3550, pips: 300 }, CHFJPY: { p: 170.00, pips: 400 }, EURJPY: { p: 162.50, pips: 400 }, GBPJPY: { p: 190.00, pips: 400 }, EURNZD: { p: 1.7850, pips: 400 } };
 let journal = JSON.parse(localStorage.getItem('v41-master-performance-final')) || [];
 let currentId = null;
 
 function formatFullTime(date) {
-    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
     return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()} - ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')} WIB`;
 }
@@ -225,7 +194,7 @@ function setTheme(theme, btn) {
 
 function showToast(msg) {
     const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2500);
+    setTimeout(() => t.classList.remove('show'), 2000);
 }
 
 function getGoldenSuggest(pos, op, slRaw, d) {
@@ -238,23 +207,18 @@ function getGoldenSuggest(pos, op, slRaw, d) {
 window.renderJournal = function() {
     const fD = document.getElementById('filterDay').value, fM = document.getElementById('filterMonth').value, fY = document.getElementById('filterYear').value;
     const filtered = journal.filter(t => { const d = new Date(t.rawDate); return (d.getDate().toString() === fD) && (d.getMonth().toString() === fM) && (d.getFullYear().toString() === fY); });
-    
     const opens = filtered.filter(t => t.status === 'OPEN');
     document.getElementById('openWarning').style.display = opens.length > 0 ? 'block' : 'none';
-    document.getElementById('btnShareDaily').style.opacity = opens.length > 0 ? "0.5" : "1";
-
     const wins = filtered.filter(t => t.status === 'PROFIT'), losses = filtered.filter(t => t.status === 'LOSS'), beps = filtered.filter(t => t.status === 'BEP'), cans = filtered.filter(t => t.status === 'CANCEL');
     let winP = 0, lossP = 0; wins.forEach(w => winP += parseFloat(w.rewardPips)); losses.forEach(l => lossP += parseFloat(l.riskPips));
     const wrVal = (wins.length + losses.length + beps.length) > 0 ? (wins.length / (wins.length + losses.length + beps.length) * 100) : 0;
     const pfVal = lossP > 0 ? (winP / lossP) : (winP > 0 ? 99 : 0);
-
     let grade = "CUKUP", gClass = "";
     if (filtered.length > 0) {
         if (pfVal < 1.0 || wrVal < 40) { grade = "BURUK"; gClass = "status-loss"; }
         else if (pfVal >= 2.5 || wrVal > 70) { grade = "MANTAP"; gClass = "status-profit"; }
         else if (pfVal >= 1.5 || wrVal > 55) { grade = "BAIK"; gClass = "status-profit"; }
     } else grade = "-";
-
     document.getElementById('statSignal').textContent = filtered.length;
     document.getElementById('statProfit').textContent = wins.length;
     document.getElementById('statLoss').textContent = losses.length;
@@ -262,19 +226,15 @@ window.renderJournal = function() {
     document.getElementById('statPF').textContent = pfVal === 99 ? 'MAX' : pfVal.toFixed(2);
     document.getElementById('statNet').textContent = (winP - lossP).toFixed(1);
     const gEl = document.getElementById('statGrade'); gEl.textContent = grade; gEl.className = 'stat-val ' + gClass;
-
     document.getElementById('journalBody').innerHTML = filtered.map(t => `
         <tr>
             <td><b>${t.tradeId}</b><span class="full-date">${t.dateDisplay}</span></td>
             <td><b>${t.pair}</b><br><small>OP: ${t.op}</small></td>
             <td><span class="badge ${t.pos === 'BUY' ? 'bg-buy' : 'bg-sell'}">${t.pos}</span></td>
-            <td><b>1:${t.rrr}</b><br><small>P:+${t.rewardPips}|L:-${t.riskPips}</small></td>
+            <td><b>1:${t.rrr}</b><br><small>+${t.rewardPips}</small></td>
             <td><span class="full-date">${t.expiryDisplay}</span></td>
             <td class="status-${t.status.toLowerCase()}"><b>${t.status}</b></td>
-            <td>
-              <button style="border:none; background:none; cursor:pointer;" onclick="copyJournalRow('${t.id}')">📋</button>
-              <button style="border:none; background:none; cursor:pointer;" onclick="openModal('${t.id}')">⚙️</button>
-            </td>
+            <td><button onclick="copyJournalRow('${t.id}')">📋</button><button onclick="openModal('${t.id}')">⚙️</button></td>
         </tr>`).join('');
 };
 
@@ -283,15 +243,9 @@ window.shareDailySummary = function() {
   const fD = document.getElementById('filterDay').value, fM = document.getElementById('filterMonth').value, fY = document.getElementById('filterYear').value;
   const filtered = journal.filter(t => { const d = new Date(t.rawDate); return (d.getDate().toString() === fD) && (d.getMonth().toString() === fM) && (d.getFullYear().toString() === fY); });
   if(filtered.length === 0) return alert("Data kosong.");
-
   const wins = filtered.filter(t => t.status === 'PROFIT'), losses = filtered.filter(t => t.status === 'LOSS'), beps = filtered.filter(t => t.status === 'BEP'), cans = filtered.filter(t => t.status === 'CANCEL');
   let winP = 0, lossP = 0; wins.forEach(w => winP += parseFloat(w.rewardPips)); losses.forEach(l => lossP += parseFloat(l.riskPips));
-  
   const net = (winP - lossP).toFixed(1);
-  const wr = document.getElementById('statWinrate').innerText;
-  const pf = document.getElementById('statPF').innerText;
-  const grade = document.getElementById('statGrade').innerText;
-
   const text = `📊 DAILY PERFORMANCE REPORT
 Tanggal: ${fD}/${parseInt(fM)+1}/${fY}
 -------------------------------
@@ -302,24 +256,24 @@ BEP / SL+      : ${beps.length}
 CANCEL/EXPRD  : ${cans.length}
 -------------------------------
 NET PIPS      : ${net > 0 ? '+' + net : net}
-WIN RATE      : ${wr}
-PROFIT FACTOR : ${pf}
-QUALITY       : ${grade}
+WIN RATE      : ${document.getElementById('statWinrate').innerText}
+PROFIT FACTOR : ${document.getElementById('statPF').innerText}
+QUALITY       : ${document.getElementById('statGrade').innerText}
 -------------------------------
 Tips me  
 https://forexemas.myr.id/support
 -------------------------------
 Generated by V41 FOREXEMAS`;
-
-  navigator.clipboard.writeText(text).then(() => showToast("Daily Report Disalin! 📢"));
+  navigator.clipboard.writeText(text).then(() => showToast("Daily Report Disalin!"));
 };
 
 window.copyJournalRow = function(id, manualData = null) {
     const t = manualData || journal.find(item => item.id == id);
     if (!t) return;
     const dec = (t.pair === 'XAUUSD' || t.pair.includes('JPY')) ? 2 : 5;
-    const text = `Trade [${t.tradeId}] ${t.stars}\nPair: ${t.pair} (${t.pos})\nEntry: ${t.op}\nGolden: ${getGoldenSuggest(t.pos, t.op, t.sl, dec)}\nSL: ${t.sl}\nTP: ${t.tp} (+${t.rewardPips} pips)\nRRR: 1:${t.rrr}\nAlasan: ${t.reason || '-'}\n------------------\nTerbit: ${t.dateDisplay}\nExpired: ${t.expiryDisplay}\nHasil: ${t.status}\nGenerated by V41 FOREXEMAS`;
-    navigator.clipboard.writeText(text).then(() => showToast("Signal Disalin!"));
+    const statusText = (t.status === 'OPEN' || t.status === 'PENDING') ? 'OPEN' : t.status;
+    const text = `Trade [${t.tradeId}] ${t.stars}\nPair: ${t.pair} (${t.pos})\nEntry: ${t.op}\nGolden: ${getGoldenSuggest(t.pos, t.op, t.sl, dec)}\nSL: ${t.sl}\nTP: ${t.tp} (+${t.rewardPips} pips)\nRRR: 1:${t.rrr}\nAlasan: ${t.reason || '-'}\n------------------\nTerbit: ${t.dateDisplay}\nExpired: ${t.expiryDisplay}\nHasil: ${statusText}\nGenerated by V41 FOREXEMAS`;
+    navigator.clipboard.writeText(text).then(() => showToast("Sinyal Disalin!"));
 };
 
 window.saveAndRender = () => { localStorage.setItem('v41-master-performance-final', JSON.stringify(journal)); window.renderJournal(); };
@@ -334,11 +288,11 @@ window.updateDayOptions = () => {
 window.openModal = (id) => { currentId = id; document.getElementById('statusModal').style.display = 'flex'; };
 window.closeModal = () => { document.getElementById('statusModal').style.display = 'none'; };
 window.updateStatus = (s) => { journal = journal.map(t => t.id == currentId ? {...t, status: s} : t); window.saveAndRender(); window.closeModal(); };
-window.deleteItem = () => { if(confirm("Hapus trade ini?")) { journal = journal.filter(t => t.id != currentId); window.saveAndRender(); window.closeModal(); } };
+window.deleteItem = () => { if(confirm("Hapus trade?")) { journal = journal.filter(t => t.id != currentId); window.saveAndRender(); window.closeModal(); } };
 window.deleteFiltered = () => { if(confirm("Hapus data terfilter?")) { const d=document.getElementById('filterDay').value, m=document.getElementById('filterMonth').value, y=document.getElementById('filterYear').value; journal = journal.filter(t => { const dt = new Date(t.rawDate); return !((dt.getDate().toString() === d) && (dt.getMonth().toString() === m) && (dt.getFullYear().toString() === y)); }); window.saveAndRender(); } };
-window.exportData = () => { const blob = new Blob([JSON.stringify(journal, null, 2)], {type:"application/json"}); const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`V41_Backup_${Date.now()}.json`; a.click(); };
+window.exportData = () => { const blob = new Blob([JSON.stringify(journal, null, 2)], {type:"application/json"}); const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`V41_Backup.json`; a.click(); };
 window.triggerImport = () => document.getElementById('importInput').click();
-window.handleImport = (e) => { const reader = new FileReader(); reader.onload=(ev)=>{ try{journal=JSON.parse(ev.target.result); window.saveAndRender(); showToast("Import Sukses!");}catch(e){alert("Format salah!");} }; reader.readAsText(e.target.files[0]); };
+window.handleImport = (e) => { const reader = new FileReader(); reader.onload=(ev)=>{ try{journal=JSON.parse(ev.target.result); window.saveAndRender(); showToast("Import Sukses!");}catch(e){alert("Error!");} }; reader.readAsText(e.target.files[0]); };
 
 document.addEventListener('DOMContentLoaded', () => {
     const el = { op: document.getElementById('op'), slInfo: document.getElementById('slInfo'), tp: document.getElementById('tp'), rrr: document.getElementById('rrr'), tpPips: document.getElementById('tpPips'), pair: document.getElementById('pair'), pos: document.getElementById('position'), stars: document.getElementById('starOption'), reason: document.getElementById('entryReason'), expiry: document.getElementById('customExpiry'), fDay: document.getElementById('filterDay'), fMonth: document.getElementById('filterMonth'), fYear: document.getElementById('filterYear') };
@@ -350,31 +304,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateAll() {
         const p = el.pair.value, pv = p === 'XAUUSD' ? 0.1 : (p.includes('JPY') ? 0.01 : 0.0001), d = (p === 'XAUUSD' || p.includes('JPY')) ? 2 : 5;
-        
-        let val = el.op.value.replace(',', '.');
-        let vOP = parseFloat(val) || 0;
+        let vOP = parseFloat(el.op.value.replace(',', '.')) || 0;
         let pips = parseFloat(el.tpPips.value) || 0, mult = parseFloat(el.rrr.value) || 1;
         const riskVal = (pips / mult).toFixed(1), vTP = el.pos.value === 'buy' ? vOP + (pips * pv) : vOP - (pips * pv), vSL = el.pos.value === 'buy' ? vOP - (riskVal * pv) : vOP + (riskVal * pv);
-        
         el.tp.value = vTP.toFixed(d).replace('.', ',');
         el.slInfo.value = `${vSL.toFixed(d).replace('.', ',')} (-${riskVal} pips)`;
         document.getElementById('previewBody').innerHTML = `<tr><td>${p}</td><td>${el.pos.value.toUpperCase()}</td><td>${vOP.toFixed(d).replace('.', ',')}</td><td>${vSL.toFixed(d).replace('.', ',')}</td><td>${el.tp.value}</td><td>1:${mult}</td></tr>`;
     }
 
-    // AUTO FIX DECIMAL ON BLUR
-    el.op.onblur = () => {
-        const p = el.pair.value, d = (p === 'XAUUSD' || p.includes('JPY')) ? 2 : 5;
-        let val = parseFloat(el.op.value.replace(',', '.')) || 0;
-        el.op.value = val.toFixed(d).replace('.', ',');
-        updateAll();
-    };
-
-    el.pair.onchange = () => { 
-        const p = el.pair.value, d = (p === 'XAUUSD' || p.includes('JPY')) ? 2 : 5;
-        el.op.value = BLUEPRINT_DEFAULTS[p].p.toFixed(d).replace('.', ',');
-        updateAll(); 
-    };
-    
+    el.op.onblur = () => { const p = el.pair.value, d = (p === 'XAUUSD' || p.includes('JPY')) ? 2 : 5; let val = parseFloat(el.op.value.replace(',', '.')) || 0; el.op.value = val.toFixed(d).replace('.', ','); updateAll(); };
+    el.pair.onchange = () => { const p = el.pair.value, d = (p === 'XAUUSD' || p.includes('JPY')) ? 2 : 5; el.op.value = BLUEPRINT_DEFAULTS[p].p.toFixed(d).replace('.', ','); updateAll(); };
     document.getElementById('btnTabCalc').onclick = () => { document.getElementById('sectionCalc').style.display='block'; document.getElementById('sectionJournal').style.display='none'; document.getElementById('btnTabCalc').classList.add('active'); document.getElementById('btnTabJournal').classList.remove('active'); };
     document.getElementById('btnTabJournal').onclick = () => { document.getElementById('sectionCalc').style.display='none'; document.getElementById('sectionJournal').style.display='block'; document.getElementById('btnTabJournal').classList.add('active'); document.getElementById('btnTabCalc').classList.remove('active'); window.renderJournal(); };
     
