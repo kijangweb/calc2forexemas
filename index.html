@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="utf-8"/>
-<title>V41 Master Blueprint - Professional Support Edition</title>
+<title>V41 FOREXEMAS - Performance Engine 2026</title>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <style>
 :root {
@@ -21,7 +21,7 @@ body{
   position: fixed; bottom: 25px; right: 25px; padding: 15px 30px;
   background: #238636; color: #fff; border-radius: 12px; font-weight: 800;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: translateY(150px);
-  transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999;
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999;
 }
 #toast.show { transform: translateY(0); }
 
@@ -62,11 +62,18 @@ button.primary-btn { padding:16px; border:none; border-radius:12px; cursor:point
     font-weight: 700; margin-bottom: 15px; display: none; text-align: center;
 }
 
-.stats-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-@media (min-width: 600px) { .stats-container { grid-template-columns: repeat(6, 1fr); } }
+/* Stats Styling */
+.stats-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px; }
+@media (min-width: 600px) { .stats-container { grid-template-columns: repeat(7, 1fr); } }
 .stat-item { padding: 12px 5px; border-radius: 12px; background: rgba(255,255,255,0.05); text-align: center; border-bottom: 3px solid rgba(128,128,128,0.3); }
 .stat-val { display: block; font-size: 14px; font-weight: 900; margin-top: 5px; }
 .stat-label { font-size: 8px; opacity: 0.5; text-transform: uppercase; font-weight: 700; }
+
+#statGrade { font-weight: 900; letter-spacing: 1px; }
+.grade-bad { color: #ff3e3e; }
+.grade-eval { color: #ffa500; }
+.grade-good { color: #00f6ff; }
+.grade-excellent { color: #3fb950; }
 
 table { width:100%; border-collapse:collapse; margin-top:20px; font-size:11px; }
 th { padding:12px; border-bottom: 2px solid rgba(128,128,128,0.3); opacity: 0.7; text-align: center; }
@@ -94,7 +101,7 @@ td { padding:15px 8px; text-align:center; border-bottom:1px solid rgba(128,128,1
 
 <div class="card">
   <nav>
-    <button id="btnTabCalc" class="active">Kalkulator RRR</button>
+    <button id="btnTabCalc" class="active">Kalkulator V41</button>
     <button id="btnTabJournal">Database Jurnal</button>
   </nav>
 
@@ -116,28 +123,28 @@ td { padding:15px 8px; text-align:center; border-bottom:1px solid rgba(128,128,1
       <div class="box"><label>RRR Multiplier</label><input id="rrr" class="form-field" type="number" step="0.1" value="1"></div>
     </div>
     <div class="grid-2">
-      <div class="box"><label>Entry Price (OP)</label><input id="op" class="form-field" type="text" value="2641,99"></div>
-      <div class="box"><label>Alasan Entry</label><input id="entryReason" class="form-field" type="text" placeholder="Analisa Strategi"></div>
+      <div class="box"><label>Entry Price</label><input id="op" class="form-field" type="text" value="2641,99"></div>
+      <div class="box"><label>Alasan Entry</label><input id="entryReason" class="form-field" type="text" placeholder="EMA 8/13/21 Cross"></div>
     </div>
     <div class="grid-2">
       <div class="box"><label>Stop Loss (SL)</label><input id="slInfo" class="form-field" readonly></div>
       <div class="box"><label>Take Profit (TP)</label><input id="tp" class="form-field" readonly></div>
     </div>
     <div class="grid-2">
-      <div class="box"><label>TP Pips Target</label><input id="tpPips" class="form-field" type="number" value="500"></div>
+      <div class="box"><label>TP Pips Plan</label><input id="tpPips" class="form-field" type="number" value="500"></div>
       <div class="box"><label>Side</label><select id="position" class="form-field"><option value="buy">🟢 BUY</option><option value="sell">🔴 SELL</option></select></div>
     </div>
     <div class="grid-2">
-      <div class="box"><label>Duration Limit (Jam)</label><input id="customExpiry" class="form-field" type="number" value="2"></div>
+      <div class="box"><label>Duration (Jam)</label><input id="customExpiry" class="form-field" type="number" value="2"></div>
     </div>
     <div style="display:flex; gap:12px; margin-top:20px;">
         <button id="copyOnlyBtn" class="primary-btn" style="background:#333; color:#fff; flex:1">COPY CAPTION</button>
         <button id="saveJournalBtn" class="primary-btn" style="flex:1.2">SIMPAN KE JURNAL</button>
     </div>
 
-    <h3 style="margin-top:40px; font-size:11px; opacity:0.5; letter-spacing:1px;">SUMMARY PREVIEW:</h3>
+    <h3 style="margin-top:40px; font-size:11px; opacity:0.5;">SUMMARY PREVIEW:</h3>
     <table>
-      <thead><tr><th>Pair</th><th>Side</th><th>Entry</th><th>SL murni</th><th>TP</th><th>RRR</th></tr></thead>
+      <thead><tr><th>Pair</th><th>Side</th><th>Entry</th><th>SL</th><th>TP</th><th>RRR</th></tr></thead>
       <tbody id="previewBody"></tbody>
     </table>
   </div>
@@ -149,11 +156,12 @@ td { padding:15px 8px; text-align:center; border-bottom:1px solid rgba(128,128,1
       <div id="openWarning">⚠️ ADA POSISI OPEN! SELESAIKAN STATUS SEMUA TRADE HARI INI UNTUK SHARE REPORT.</div>
 
       <div class="stats-container">
-        <div class="stat-item"><span id="statSignal" class="stat-val">0</span><span class="stat-label">Total</span></div>
-        <div class="stat-item"><span id="statProfit" class="stat-val status-profit">0</span><span class="stat-label">Wins</span></div>
+        <div class="stat-item"><span id="statSignal" class="stat-val">0</span><span class="stat-label">Signal</span></div>
+        <div class="stat-item"><span id="statProfit" class="stat-val status-profit">0</span><span class="stat-label">Profit</span></div>
         <div class="stat-item"><span id="statLoss" class="stat-val status-loss">0</span><span class="stat-label">Loss</span></div>
-        <div class="stat-item"><span id="statBEP" class="stat-val status-bep">0</span><span class="stat-label">BEP</span></div>
-        <div class="stat-item"><span id="statCancel" class="stat-val status-cancel">0</span><span class="stat-label">Cancel</span></div>
+        <div class="stat-item"><span id="statWinrate" class="stat-val">0%</span><span class="stat-label">Winrate</span></div>
+        <div class="stat-item"><span id="statPF" class="stat-val">0.0</span><span class="stat-label">PF</span></div>
+        <div class="stat-item" style="background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1);"><span id="statGrade" class="stat-val">-</span><span class="stat-label">Quality</span></div>
         <div class="stat-item"><span id="statNet" class="stat-val">0</span><span class="stat-label">Net Pips</span></div>
       </div>
 
@@ -164,10 +172,10 @@ td { padding:15px 8px; text-align:center; border-bottom:1px solid rgba(128,128,1
       </div>
 
       <div class="state-actions">
-        <button id="btnShareDaily" class="btn-state" style="background:linear-gradient(135deg,#007bff,#00f6ff); color:#fff; border:none;" onclick="shareDailySummary()">📢 EXPORT DAILY REPORT</button>
+        <button id="btnShareDaily" class="btn-state" style="background:linear-gradient(135deg,#007bff,#00f6ff); color:#fff; border:none;" onclick="shareDailySummary()">📢 SHARE DAILY REPORT</button>
         <button class="btn-state" onclick="exportData()">💾 EXPORT JSON</button>
         <button class="btn-state" onclick="triggerImport()">📂 IMPORT JSON</button>
-        <button class="btn-state" style="background:#da3633; color:#fff; border:none;" onclick="deleteFiltered()">🗑️ RESET FILTER</button>
+        <button class="btn-state" style="background:#da3633; color:#fff; border:none;" onclick="deleteFiltered()">🗑️ RESET</button>
       </div>
       <input type="file" id="importInput" style="display:none" onchange="handleImport(event)">
     </div>
@@ -197,7 +205,7 @@ const BLUEPRINT_DEFAULTS = {
     XAUUSD: { p: 2641.99, pips: 500 }, EURUSD: { p: 1.0850, pips: 300 }, GBPUSD: { p: 1.2650, pips: 300 }, USDJPY: { p: 150.00, pips: 400 }, AUDUSD: { p: 0.6550, pips: 200 }, EURGBP: { p: 0.8550, pips: 200 }, NZDUSD: { p: 0.6150, pips: 200 }, USDCHF: { p: 0.8850, pips: 200 }, AUDJPY: { p: 98.50, pips: 300 }, CADJPY: { p: 110.00, pips: 300 }, NZDJPY: { p: 91.50, pips: 300 }, USDCAD: { p: 1.3550, pips: 300 }, CHFJPY: { p: 170.00, pips: 400 }, EURJPY: { p: 162.50, pips: 400 }, GBPJPY: { p: 190.00, pips: 400 }, EURNZD: { p: 1.7850, pips: 400 }
 };
 
-let journal = JSON.parse(localStorage.getItem('v41-master-final-verified-report')) || [];
+let journal = JSON.parse(localStorage.getItem('v41-master-performance-final')) || [];
 let currentId = null;
 
 function formatFullTime(date) {
@@ -221,7 +229,6 @@ function getGoldenSuggest(pos, op, slRaw, d) {
     return (pos === 'BUY') ? `${s1} - ${s2}` : `${s2} - ${s1}`;
 }
 
-// PREMIUM SUMMARY WITH SUPPORT LINK
 window.shareDailySummary = function() {
     const btn = document.getElementById('btnShareDaily');
     if(btn.classList.contains('btn-locked')) return alert("Selesaikan trade OPEN.");
@@ -238,34 +245,37 @@ window.shareDailySummary = function() {
     const lossC = filtered.filter(t => t.status === 'LOSS').length;
     const bepC = filtered.filter(t => t.status === 'BEP').length;
     const canC = filtered.filter(t => t.status === 'CANCEL').length;
-    
     let winP = 0, lossP = 0;
     filtered.forEach(t => {
         if(t.status === 'PROFIT') winP += parseFloat(t.rewardPips);
         if(t.status === 'LOSS') lossP += parseFloat(t.riskPips);
     });
 
+    const net = (winP - lossP).toFixed(1);
     const wr = (winC + lossC + bepC) > 0 ? ((winC / (winC + lossC + bepC)) * 100).toFixed(1) : "0.0";
+    const pf = document.getElementById('statPF').innerText;
+    const grade = document.getElementById('statGrade').innerText;
     
     const text = `📊 DAILY PERFORMANCE REPORT
 Tanggal: ${fD}/${parseInt(fM)+1}/${fY}
 -------------------------------
 TOTAL SIGNAL  : ${filtered.length} ✅
--------------------------------
 WIN / PROFIT  : ${winC}
 LOSS / RISK   : ${lossC}
 BEP / SL+     : ${bepC}
 CANCEL/EXPRD  : ${canC}
 -------------------------------
-NET PIPS      : ${(winP - lossP).toFixed(1)}
+NET PIPS      : ${net > 0 ? '+' + net : net}
 WIN RATE      : ${wr}%
+PROFIT FACTOR : ${pf}
+QUALITY       : ${grade}
 -------------------------------
-DETAIL & SUPPORT:
+DETAIL & MASTER:
 https://forexemas.myr.id/support
 -------------------------------
 Generated by V41 Induk Master`;
     
-    navigator.clipboard.writeText(text).then(() => showToast("Daily Report Disalin! 📢"));
+    navigator.clipboard.writeText(text).then(() => showToast("Detailed Summary Disalin! 📢"));
 };
 
 window.copyJournalRow = function(id, manualData = null) {
@@ -273,14 +283,14 @@ window.copyJournalRow = function(id, manualData = null) {
     if (!t) return;
     const dec = (t.pair === 'XAUUSD' || t.pair.includes('JPY')) ? 2 : 5;
     const suggest = getGoldenSuggest(t.pos, t.op, t.sl, dec);
-    const text = `📓 TRADE [${t.tradeId}] ${t.stars}\nPair: ${t.pair} (${t.pos})\nEntry: ${t.op}\nGolden Area: ${suggest}\nSL: ${t.sl}\nTP: ${t.tp} (+${t.rewardPips} pips)\nRRR: 1:${t.rrr}\nAlasan: ${t.reason || '-'}\n---------------------------------\nTerbit: ${t.dateDisplay}\nExpired: ${t.expiryDisplay}\nHasil: ${t.status}`;
-    navigator.clipboard.writeText(text).then(() => showToast("Sinyal Disalin!"));
+    const text = `Trade [${t.tradeId}] ${t.stars}\nPair: ${t.pair} (${t.pos})\nEntry: ${t.op}\nGolden: ${suggest}\nSL: ${t.sl}\nTP: ${t.tp} (+${t.rewardPips} pips)\nRRR: 1:${t.rrr}\nAlasan: ${t.reason || '-'}\n---------------------------------\nTerbit: ${t.dateDisplay}\nExpired: ${t.expiryDisplay}\nHasil: ${t.status}`;
+    navigator.clipboard.writeText(text).then(() => showToast("Signal Disalin!"));
 };
 
 window.exportData = function() {
     const blob = new Blob([JSON.stringify(journal, null, 2)], { type: "application/json" });
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-    a.download = `V41_Backup.json`; a.click();
+    a.download = `V41_Blueprint_Backup.json`; a.click();
 };
 
 window.triggerImport = function() { document.getElementById('importInput').click(); };
@@ -293,7 +303,7 @@ window.handleImport = function(e) {
     reader.readAsText(file);
 };
 
-window.deleteFiltered = function() { if(confirm("Reset database terfilter?")) { 
+window.deleteFiltered = function() { if(confirm("Hapus data terfilter?")) { 
     const d = document.getElementById('filterDay').value, m = document.getElementById('filterMonth').value, y = document.getElementById('filterYear').value;
     journal = journal.filter(t => {
         const dt = new Date(t.rawDate);
@@ -303,7 +313,7 @@ window.deleteFiltered = function() { if(confirm("Reset database terfilter?")) {
 }};
 
 window.saveAndRender = function() {
-    localStorage.setItem('v41-master-final-verified-report', JSON.stringify(journal));
+    localStorage.setItem('v41-master-performance-final', JSON.stringify(journal));
     window.renderJournal();
 };
 
@@ -330,19 +340,30 @@ window.renderJournal = function() {
     document.getElementById('openWarning').style.display = opens.length > 0 ? 'block' : 'none';
     document.getElementById('btnShareDaily').className = opens.length > 0 ? 'btn-state btn-locked' : 'btn-state';
 
-    const wins = filtered.filter(t => t.status === 'PROFIT'), 
-          losses = filtered.filter(t => t.status === 'LOSS'), 
-          beps = filtered.filter(t => t.status === 'BEP');
+    const wins = filtered.filter(t => t.status === 'PROFIT'), losses = filtered.filter(t => t.status === 'LOSS'), beps = filtered.filter(t => t.status === 'BEP');
     let winP = 0, lossP = 0;
     wins.forEach(w => winP += parseFloat(w.rewardPips));
     losses.forEach(l => lossP += parseFloat(l.riskPips));
 
+    const wrVal = (wins.length + losses.length + beps.length) > 0 ? (wins.length / (wins.length + losses.length + beps.length)) * 100 : 0;
+    const pfVal = lossP > 0 ? (winP / lossP) : (winP > 0 ? 99 : 0);
+
+    // LOGIKA QUALITY GRADE
+    let grade = "CUKUP", gradeClass = "grade-eval";
+    if (filtered.length > 0) {
+        if (pfVal < 1.0 || wrVal < 40) { grade = "BURUK"; gradeClass = "grade-bad"; }
+        else if (pfVal >= 2.5 || wrVal > 70) { grade = "MANTAP"; gradeClass = "grade-excellent"; }
+        else if (pfVal >= 1.5 || wrVal > 55) { grade = "BAIK"; gradeClass = "grade-good"; }
+    } else { grade = "-"; }
+
     document.getElementById('statSignal').textContent = filtered.length;
     document.getElementById('statProfit').textContent = wins.length;
     document.getElementById('statLoss').textContent = losses.length;
-    document.getElementById('statBEP').textContent = beps.length;
-    document.getElementById('statCancel').textContent = filtered.filter(t => t.status === 'CANCEL').length;
+    document.getElementById('statWinrate').textContent = wrVal.toFixed(1) + '%';
+    document.getElementById('statPF').textContent = pfVal === 99 ? 'MAX' : pfVal.toFixed(2);
     document.getElementById('statNet').textContent = (winP - lossP).toFixed(1);
+    const gEl = document.getElementById('statGrade');
+    gEl.textContent = grade; gEl.className = 'stat-val ' + gradeClass;
 
     document.getElementById('journalBody').innerHTML = filtered.map(t => `
         <tr>
@@ -374,8 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stars: document.getElementById('starOption'), reason: document.getElementById('entryReason'),
         expiry: document.getElementById('customExpiry'), theme: document.getElementById('theme'),
         fDay: document.getElementById('filterDay'), fMonth: document.getElementById('filterMonth'), fYear: document.getElementById('filterYear'),
-        btnSave: document.getElementById('saveJournalBtn'), btnCopy: document.getElementById('copyOnlyBtn'),
-        btnTabCalc: document.getElementById('btnTabCalc'), btnTabJournal: document.getElementById('btnTabJournal')
+        btnSave: document.getElementById('saveJournalBtn'), btnCopy: document.getElementById('copyOnlyBtn')
     };
 
     const today = new Date();
@@ -394,7 +414,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const riskVal = (pips / mult).toFixed(1), vTP = el.pos.value === 'buy' ? vOP + (pips * pv) : vOP - (pips * pv), vSL = el.pos.value === 'buy' ? vOP - (riskVal * pv) : vOP + (riskVal * pv);
         el.tp.value = vTP.toFixed(d).replace('.', ',');
         el.slInfo.value = `${vSL.toFixed(d).replace('.', ',')} (-${riskVal} pips)`;
-        
         document.getElementById('previewBody').innerHTML = `<tr><td>${p}</td><td>${el.pos.value.toUpperCase()}</td><td>${el.op.value}</td><td>${vSL.toFixed(d).replace('.', ',')}</td><td>${el.tp.value}</td><td>1:${mult}</td></tr>`;
     }
 
@@ -402,16 +421,16 @@ document.addEventListener('DOMContentLoaded', () => {
     el.btnCopy.onclick = () => window.copyJournalRow(null, createTrade());
     el.btnSave.onclick = () => {
         const d = createTrade(); journal.unshift(d); window.saveAndRender();
-        window.copyJournalRow(d.id); showToast("Sinyal & Jurnal Update! 📓");
+        window.copyJournalRow(d.id); showToast("Sinyal & Jurnal Update!");
     };
     function createTrade() {
         const now = new Date(), exp = new Date(now.getTime() + (el.expiry.value * 3600000));
         return { id: Date.now(), tradeId: "TRX-" + Math.floor(100000 + Math.random()*900000), rawDate: now.toISOString(), dateDisplay: formatFullTime(now), expiryDisplay: formatFullTime(exp), expiryHrs: el.expiry.value, pair: el.pair.value, pos: el.pos.value.toUpperCase(), rrr: el.rrr.value, op: el.op.value, tp: el.tp.value, sl: el.slInfo.value, rewardPips: el.tpPips.value, riskPips: (el.tpPips.value/el.rrr.value).toFixed(1), status: 'OPEN', stars: el.stars.value, reason: el.reason.value };
     }
-    el.btnTabCalc.onclick = () => { document.getElementById('sectionCalc').style.display='block'; document.getElementById('sectionJournal').style.display='none'; el.btnTabCalc.classList.add('active'); el.btnTabJournal.classList.remove('active'); };
-    el.btnTabJournal.onclick = () => { document.getElementById('sectionCalc').style.display='none'; document.getElementById('sectionJournal').style.display='block'; el.btnTabJournal.classList.add('active'); el.btnTabCalc.classList.remove('active'); window.renderJournal(); };
+    document.getElementById('btnTabCalc').onclick = () => { document.getElementById('sectionCalc').style.display='block'; document.getElementById('sectionJournal').style.display='none'; document.getElementById('btnTabCalc').classList.add('active'); document.getElementById('btnTabJournal').classList.remove('active'); };
+    document.getElementById('btnTabJournal').onclick = () => { document.getElementById('sectionCalc').style.display='none'; document.getElementById('sectionJournal').style.display='block'; document.getElementById('btnTabJournal').classList.add('active'); document.getElementById('btnTabCalc').classList.remove('active'); window.renderJournal(); };
     el.theme.onchange = () => document.body.className = el.theme.value;
-    [el.op, el.tpPips, el.rrr, el.pos, el.customExpiry].forEach(i => i.oninput = updateAll);
+    [el.op, el.tpPips, el.rrr, el.pos, el.expiry].forEach(i => i.oninput = updateAll);
     updateAll();
 });
 </script>
