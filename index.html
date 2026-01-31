@@ -2,118 +2,108 @@
 <html lang="id">
 <head>
 <meta charset="utf-8"/>
-<title>Pro Multi Pair RRR & Journal Ultimate - V41 INDUK BLUEPRINT MASTER</title>
+<title>V41 Master Blueprint - Professional Support Edition</title>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <style>
 :root {
   --gold-dark: #6b5200; --gold-mid: #c7a420; --gold-light: #ffe17b;
-  --neon-blue: #00f6ff; --neon-dark: #08121b;
-  --warn-red: #ff3e3e;
+  --neon-blue: #00f6ff; --neon-dark: #08121b; --warn-red: #ff3e3e;
 }
-*{box-sizing:border-box;}
+*{box-sizing:border-box; outline: none;}
 body{
-  margin:0; font-family:'Poppins',Segoe UI,Arial;
+  margin:0; font-family:'Poppins',Segoe UI,sans-serif;
   display:flex; justify-content:center; align-items:flex-start;
   padding:20px; min-height:100vh; transition: 0.5s;
 }
-.card{ width:100%; max-width:1100px; border-radius:16px; padding:26px 28px; transition:all 0.5s ease; }
+.card{ width:100%; max-width:1150px; border-radius:20px; padding:30px; transition:all 0.5s ease; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
 
-/* TOAST NOTIF */
 #toast {
-  position: fixed; bottom: 20px; right: 20px; padding: 12px 24px;
-  background: #238636; color: #fff; border-radius: 8px; font-weight: 800;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5); transform: translateY(100px);
-  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999;
+  position: fixed; bottom: 25px; right: 25px; padding: 15px 30px;
+  background: #238636; color: #fff; border-radius: 12px; font-weight: 800;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: translateY(150px);
+  transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999;
 }
 #toast.show { transform: translateY(0); }
 
-/* Navigasi */
-nav { display: flex; gap: 10px; margin-bottom: 25px; }
+nav { display: flex; gap: 12px; margin-bottom: 30px; }
 nav button { 
-  flex: 1; padding: 14px; border: 2px solid rgba(128,128,128,0.3); border-radius: 10px; 
+  flex: 1; padding: 16px; border: 2px solid rgba(128,128,128,0.2); border-radius: 12px; 
   cursor: pointer; font-weight: 800; text-transform: uppercase;
-  background: transparent; color: inherit; transition: 0.3s;
+  background: transparent; color: inherit; transition: 0.3s; font-size: 11px;
 }
 
-/* THEME SYNC */
 body.gold{background:radial-gradient(circle at 40% 20%,#1a1504 0%,#0b0a07 100%);color:#FFFFFF;}
-body.gold .card{background:linear-gradient(145deg,#141006,#1a1609,#0b0904);border:2px solid var(--gold-mid);box-shadow:0 0 25px rgba(255,215,0,0.3);}
+body.gold .card{background:linear-gradient(145deg,#141006,#1a1609,#0b0904);border:2px solid var(--gold-mid);}
 body.gold nav button.active{background:var(--gold-mid); color:#000; border-color:transparent;}
 body.gold button.primary-btn{background:linear-gradient(135deg,var(--gold-mid),var(--gold-light));color:#000}
 body.gold label{color: var(--gold-light);}
 
 body.neon{background:radial-gradient(circle at top,#021220 0%,#000308 100%);color:#FFFFFF;}
-body.neon .card{background:linear-gradient(135deg,#081d33,#020910);border:1.8px solid #00f6ff;box-shadow:0 0 22px rgba(0,255,255,0.4);}
+body.neon .card{background:linear-gradient(135deg,#081d33,#020910);border:1.8px solid #00f6ff;}
 body.neon nav button.active{background:#00f6ff; color:#000; border-color:transparent;}
 body.neon button.primary-btn{background:linear-gradient(135deg,#00f6ff,#007bff);color:#fff}
 body.neon label{color: #00f6ff;}
 
-/* RIPPLE RISK EFFECT */
-@keyframes warningRipple { 
-  0% { box-shadow: 0 0 0 0 rgba(255, 62, 62, 0.6); border-color: var(--warn-red); } 
-  70% { box-shadow: 0 0 0 12px rgba(255, 62, 62, 0); border-color: var(--warn-red); } 
-  100% { box-shadow: 0 0 0 0 rgba(255, 62, 62, 0); border-color: var(--warn-red); } 
-}
-.risk-alert { animation: warningRipple 1.2s infinite !important; color: var(--warn-red) !important; font-weight: 900 !important; border: 2px solid var(--warn-red) !important; background: rgba(255,62,62,0.1) !important; }
+.grid-2, .grid-3 { display:grid; gap:20px; margin-bottom:18px; }
+.grid-2 { grid-template-columns: 1fr 1fr; }
+.grid-3 { grid-template-columns: 1fr 1fr 1fr; }
 
-/* Stats container */
-.stats-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 15px; }
-@media (min-width: 600px) { .stats-container { grid-template-columns: repeat(6, 1fr); } }
-.stat-item { padding: 10px 5px; border-radius: 8px; background: rgba(255,255,255,0.05); text-align: center; font-size: 9px; font-weight: 700; border-bottom: 3px solid rgba(128,128,128,0.3); }
-.stat-val { display: block; font-size: 13px; margin-top: 4px; }
-.stat-label { font-size: 8px; text-transform: uppercase; margin-top: 2px; display: block; }
-
-/* Components */
-.grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin-bottom:16px; }
 .box { display:flex; flex-direction:column; }
-label { font-size:13px; margin-bottom:5px; font-weight: 700; opacity: 0.9; }
-.form-field { padding:12px; border-radius:8px; border:1px solid rgba(128,128,128,0.5); font-size:15px; background: rgba(0,0,0,0.2); color: inherit; width: 100%; outline:none; transition: 0.3s; }
-.form-field[readonly] { background: rgba(128,128,128,0.1); border-style: dashed; }
-button.primary-btn { padding:14px; border:none; border-radius:8px; cursor:pointer; font-weight:800; width: 100%; transition: 0.3s; }
+label { font-size:11px; margin-bottom:8px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;}
+.form-field { padding:14px; border-radius:10px; border:1px solid rgba(128,128,128,0.4); font-size:15px; background: rgba(0,0,0,0.4); color: inherit; width: 100%; outline:none; }
 
-/* Table & Action Buttons */
-table { width:100%; border-collapse:collapse; margin-top:15px; font-size:12px; }
-th { padding:10px; text-align:center; border-bottom: 2px solid rgba(128,128,128,0.4); opacity: 0.7; }
-td { padding:12px 8px; text-align:center; border-bottom:1px solid rgba(128,128,128,0.1); vertical-align: middle; }
-.sub-info-text { display: block; font-size: 10px; opacity: 0.6; margin-top: 2px; }
-.badge { padding:3px 7px; border-radius:4px; font-weight:800; font-size: 10px; }
+.form-field[readonly] { background: rgba(128,128,128,0.08); border-style: dashed; font-weight: 300; color: #f1f1f1 !important; }
+
+button.primary-btn { padding:16px; border:none; border-radius:12px; cursor:pointer; font-weight:800; width: 100%; transition: 0.3s; font-size: 11px; }
+
+#openWarning { 
+    background: rgba(255, 62, 62, 0.2); border: 1px solid var(--warn-red); 
+    color: #ff8e8e; padding: 12px; border-radius: 8px; font-size: 11px; 
+    font-weight: 700; margin-bottom: 15px; display: none; text-align: center;
+}
+
+.stats-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+@media (min-width: 600px) { .stats-container { grid-template-columns: repeat(6, 1fr); } }
+.stat-item { padding: 12px 5px; border-radius: 12px; background: rgba(255,255,255,0.05); text-align: center; border-bottom: 3px solid rgba(128,128,128,0.3); }
+.stat-val { display: block; font-size: 14px; font-weight: 900; margin-top: 5px; }
+.stat-label { font-size: 8px; opacity: 0.5; text-transform: uppercase; font-weight: 700; }
+
+table { width:100%; border-collapse:collapse; margin-top:20px; font-size:11px; }
+th { padding:12px; border-bottom: 2px solid rgba(128,128,128,0.3); opacity: 0.7; text-align: center; }
+td { padding:15px 8px; text-align:center; border-bottom:1px solid rgba(128,128,128,0.1); vertical-align: middle; }
+.badge { padding:3px 8px; border-radius:4px; font-weight:800; font-size: 9px; }
 .bg-buy { background: #238636; color: #fff; }
 .bg-sell { background: #da3633; color: #fff; }
 
-.status-profit { color: #3fb950 !important; font-weight: 900; }
-.status-loss { color: #f85149 !important; font-weight: 900; }
-.status-bep { color: #388bfd !important; font-weight: 900; }
-.status-cancel { color: #8b949e !important; font-weight: 900; }
-.status-open { color: #d29922 !important; font-weight: 900; }
+.status-profit { color: #3fb950 !important; }
+.status-loss { color: #f85149 !important; }
+.status-bep { color: #388bfd !important; }
+.status-cancel { color: #8b949e !important; }
 
-.btn-action { background: rgba(128,128,128,0.1); border: 1px solid rgba(128,128,128,0.3); color: inherit; padding: 5px 8px; border-radius: 5px; cursor: pointer; }
-.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; }
-.modal-content { background: #1a1a1a; width: 280px; border-radius: 12px; border: 1px solid #444; overflow: hidden; }
-.modal-content button.menu-opt { display: block; width: 100%; padding: 15px; border: none; background: none; color: white; font-weight: 700; cursor: pointer; border-bottom: 1px solid #333; text-align: center; }
+.btn-state { flex: 1; padding: 12px; font-size: 10px; font-weight: 800; border-radius: 8px; cursor: pointer; border: 1px solid rgba(128,128,128,0.3); background: rgba(128,128,128,0.1); color: inherit; transition: 0.3s; }
+.btn-locked { background: #333 !important; color: #666 !important; cursor: not-allowed !important; opacity: 0.6; }
 
-/* STATE MGMT UI */
-.state-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-.btn-state { flex: 1; min-width: 100px; padding: 10px; font-size: 10px; font-weight: 800; border-radius: 6px; cursor: pointer; border: 1px solid rgba(128,128,128,0.3); background: rgba(128,128,128,0.1); color: inherit; }
-.btn-share-main { background: linear-gradient(135deg, #007bff, #00f6ff) !important; color: #fff !important; border: none !important; }
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+.modal-content { background: #111; width: 300px; border-radius: 16px; border: 1px solid #333; overflow: hidden; }
+.modal-content button.menu-opt { display: block; width: 100%; padding: 18px; border: none; background: none; color: white; font-weight: 700; cursor: pointer; border-bottom: 1px solid #222; }
 </style>
 </head>
 <body class="gold">
 
-<div id="toast">Pesan Terkirim! 📓</div>
+<div id="toast">Pesan Disalin! 📓</div>
 
 <div class="card">
   <nav>
-    <button id="btnTabCalc" class="active">Kalkulator</button>
-    <button id="btnTabJournal">Jurnal Trading</button>
+    <button id="btnTabCalc" class="active">Kalkulator RRR</button>
+    <button id="btnTabJournal">Database Jurnal</button>
   </nav>
 
   <div id="sectionCalc">
-    <h1>RRR Calculator</h1>
-    <select id="theme" class="form-field" style="margin-bottom:20px; font-weight: 900;">
-      <option value="gold">Gold Luxury</option>
-      <option value="neon">Blue Neon</option>
-    </select>
-
+    <h1>BluePrint V.41 INDUK</h1>
+    <div class="grid-2">
+      <div class="box"><label>Theme Style</label><select id="theme" class="form-field"><option value="gold">Gold Luxury</option><option value="neon">Blue Neon</option></select></div>
+      <div class="box"><label>Mark Quality</label><select id="starOption" class="form-field"><option value="⭐⭐⭐">⭐⭐⭐ (3 Stars)</option><option value="⭐⭐⭐⭐⭐" selected>⭐⭐⭐⭐⭐ (5 Stars)</option></select></div>
+    </div>
     <div class="grid-2">
       <div class="box"><label>Pair Selection</label>
         <select id="pair" class="form-field">
@@ -123,64 +113,68 @@ td { padding:12px 8px; text-align:center; border-bottom:1px solid rgba(128,128,1
           <optgroup label="Default"><option value="XAUUSD" selected>XAUUSD</option></optgroup>
         </select>
       </div>
-      <div class="box"><label>RRR Multiplier</label><input id="rrr" class="form-field" type="number" step="0.1" value="1" min="1"></div>
+      <div class="box"><label>RRR Multiplier</label><input id="rrr" class="form-field" type="number" step="0.1" value="1"></div>
     </div>
-
     <div class="grid-2">
-      <div class="box"><label>Entry Price</label><input id="op" class="form-field" type="text" inputmode="decimal"></div>
+      <div class="box"><label>Entry Price (OP)</label><input id="op" class="form-field" type="text" value="2641,99"></div>
+      <div class="box"><label>Alasan Entry</label><input id="entryReason" class="form-field" type="text" placeholder="Analisa Strategi"></div>
+    </div>
+    <div class="grid-2">
+      <div class="box"><label>Stop Loss (SL)</label><input id="slInfo" class="form-field" readonly></div>
       <div class="box"><label>Take Profit (TP)</label><input id="tp" class="form-field" readonly></div>
     </div>
-
     <div class="grid-2">
-      <div class="box"><label>TP Pips Plan</label><input id="tpPips" class="form-field" type="number"></div>
-      <div class="box"><label id="slLabel">Stop Loss (SL) Info</label><input id="slInfo" class="form-field" readonly></div>
-    </div>
-
-    <div class="grid-2">
-      <div class="box"><label>Kadaluarsa (Jam)</label><input id="customExpiry" class="form-field" type="number" value="7" min="1"></div>
+      <div class="box"><label>TP Pips Target</label><input id="tpPips" class="form-field" type="number" value="500"></div>
       <div class="box"><label>Side</label><select id="position" class="form-field"><option value="buy">🟢 BUY</option><option value="sell">🔴 SELL</option></select></div>
     </div>
+    <div class="grid-2">
+      <div class="box"><label>Duration Limit (Jam)</label><input id="customExpiry" class="form-field" type="number" value="2"></div>
+    </div>
+    <div style="display:flex; gap:12px; margin-top:20px;">
+        <button id="copyOnlyBtn" class="primary-btn" style="background:#333; color:#fff; flex:1">COPY CAPTION</button>
+        <button id="saveJournalBtn" class="primary-btn" style="flex:1.2">SIMPAN KE JURNAL</button>
+    </div>
 
-    <button id="saveBtn" class="primary-btn" style="margin-top:10px;">SAVE TO JOURNAL & COPY SIGNAL</button>
-
+    <h3 style="margin-top:40px; font-size:11px; opacity:0.5; letter-spacing:1px;">SUMMARY PREVIEW:</h3>
     <table>
-      <thead><tr><th>Pair</th><th>Side</th><th>Entry</th><th>TP</th><th>Pips</th><th>RRR</th></tr></thead>
-      <tbody id="tableBody"></tbody>
+      <thead><tr><th>Pair</th><th>Side</th><th>Entry</th><th>SL murni</th><th>TP</th><th>RRR</th></tr></thead>
+      <tbody id="previewBody"></tbody>
     </table>
   </div>
 
   <div id="sectionJournal" style="display:none;">
-    <h1>Journal History</h1>
-    <div class="filter-container" style="display:flex; flex-direction:column; gap:10px; margin-bottom:15px; padding:15px; background:rgba(128,128,128,0.1); border-radius:10px;">
+    <h1>Database Jurnal History</h1>
+    <div class="filter-container" style="background:rgba(128,128,128,0.1); padding:20px; border-radius:15px; margin-bottom:15px;">
       
+      <div id="openWarning">⚠️ ADA POSISI OPEN! SELESAIKAN STATUS SEMUA TRADE HARI INI UNTUK SHARE REPORT.</div>
+
       <div class="stats-container">
-        <div class="stat-item">SIGNAL<span id="statSignal" class="stat-val">0</span></div>
-        <div class="stat-item color-profit">PROFIT<span id="statProfit" class="stat-val">0</span></div>
-        <div class="stat-item color-loss">LOSS<span id="statLoss" class="stat-val">0</span></div>
-        <div class="stat-item color-winrate">WINRATE<span id="statWinrate" class="stat-val">0%</span></div>
-        <div class="stat-item color-pf">PF<span id="statPF" class="stat-val">0.0</span><span id="statPFLabel" class="stat-label">-</span></div>
-        <div class="stat-item">NET PIPS<span id="statNet" class="stat-val">0</span></div>
+        <div class="stat-item"><span id="statSignal" class="stat-val">0</span><span class="stat-label">Total</span></div>
+        <div class="stat-item"><span id="statProfit" class="stat-val status-profit">0</span><span class="stat-label">Wins</span></div>
+        <div class="stat-item"><span id="statLoss" class="stat-val status-loss">0</span><span class="stat-label">Loss</span></div>
+        <div class="stat-item"><span id="statBEP" class="stat-val status-bep">0</span><span class="stat-label">BEP</span></div>
+        <div class="stat-item"><span id="statCancel" class="stat-val status-cancel">0</span><span class="stat-label">Cancel</span></div>
+        <div class="stat-item"><span id="statNet" class="stat-val">0</span><span class="stat-label">Net Pips</span></div>
       </div>
 
-      <div style="display:flex; gap:10px;">
-        <div style="flex:1"><label>Bulan:</label><select id="filterMonth" class="form-field">
-          <option value="all">Semua Bulan</option><option value="0">Januari</option><option value="1">Februari</option><option value="2">Maret</option><option value="3">April</option><option value="4">Mei</option><option value="5">Juni</option><option value="6">Juli</option><option value="7">Agustus</option><option value="8">September</option><option value="9">Oktober</option><option value="10">November</option><option value="11">Desember</option>
-        </select></div>
-        <div style="flex:1"><label>Tahun:</label><select id="filterYear" class="form-field"><option value="all">Semua Tahun</option></select></div>
+      <div class="grid-3">
+        <div class="box"><label>Tgl</label><select id="filterDay" class="form-field" onchange="window.renderJournal()"></select></div>
+        <div class="box"><label>Bln</label><select id="filterMonth" class="form-field" onchange="window.updateDayOptions(); window.renderJournal()"><option value="0">Jan</option><option value="1">Feb</option><option value="2">Mar</option><option value="3">Apr</option><option value="4">Mei</option><option value="5">Jun</option><option value="6">Jul</option><option value="7">Agu</option><option value="8">Sep</option><option value="9">Okt</option><option value="10">Nov</option><option value="11">Des</option></select></div>
+        <div class="box"><label>Thn</label><select id="filterYear" class="form-field" onchange="window.renderJournal()"></select></div>
       </div>
 
       <div class="state-actions">
-        <button class="btn-state btn-share-main" onclick="shareSummary()">📢 SHARE SUMMARY</button>
-        <button class="btn-state" onclick="exportData()">💾 DOWNLOAD JSON</button>
+        <button id="btnShareDaily" class="btn-state" style="background:linear-gradient(135deg,#007bff,#00f6ff); color:#fff; border:none;" onclick="shareDailySummary()">📢 EXPORT DAILY REPORT</button>
+        <button class="btn-state" onclick="exportData()">💾 EXPORT JSON</button>
         <button class="btn-state" onclick="triggerImport()">📂 IMPORT JSON</button>
-        <button class="btn-state" style="background:#da3633; color:#fff;" onclick="deleteFilteredData()">🗑️ HAPUS FILTER</button>
+        <button class="btn-state" style="background:#da3633; color:#fff; border:none;" onclick="deleteFiltered()">🗑️ RESET FILTER</button>
       </div>
-      <input type="file" id="importInput" style="display:none" accept=".json">
+      <input type="file" id="importInput" style="display:none" onchange="handleImport(event)">
     </div>
 
     <div style="overflow-x:auto;">
-      <table id="journalTable">
-        <thead><tr><th>Trade ID / Waktu</th><th>Pair / Entry</th><th>Side</th><th>RRR (Plan)</th><th>Status / Pips</th><th>Opsi</th></tr></thead>
+      <table>
+        <thead><tr><th>Trade ID / Waktu</th><th>Pair / OP</th><th>Side</th><th>Ratio (P/L)</th><th>Kadaluarsa</th><th>Status</th><th>Aksi</th></tr></thead>
         <tbody id="journalBody"></tbody>
       </table>
     </div>
@@ -189,197 +183,236 @@ td { padding:12px 8px; text-align:center; border-bottom:1px solid rgba(128,128,1
 
 <div id="statusModal" class="modal-overlay">
   <div class="modal-content">
-    <button class="menu-opt" onclick="updateJournalStatus('PROFIT')" style="color:#3fb950">WIN / PROFIT</button>
-    <button class="menu-opt" onclick="updateJournalStatus('LOSS')" style="color:#f85149">LOSS / CUTLOSS</button>
-    <button class="menu-opt" onclick="updateJournalStatus('BEP')" style="color:#388bfd">BEP / SL+</button>
-    <button class="menu-opt" onclick="updateJournalStatus('CANCEL')" style="color:#8b949e">CANCEL / EXPIRED</button>
-    <button class="menu-opt" onclick="deleteJournalItem()" style="color:#f85149; font-weight:800;">HAPUS PERMANEN</button>
+    <button class="menu-opt" onclick="updateStatus('PROFIT')" style="color:#3fb950">WIN / PROFIT</button>
+    <button class="menu-opt" onclick="updateStatus('LOSS')" style="color:#f85149">LOSS / CUTLOSS</button>
+    <button class="menu-opt" onclick="updateStatus('BEP')" style="color:#388bfd">BEP / SL+</button>
+    <button class="menu-opt" onclick="updateStatus('CANCEL')" style="color:#8b949e">CANCEL / EXPIRED</button>
+    <button class="menu-opt" onclick="deleteItem()" style="color:#f85149; font-weight:800; border-top:1px solid #333;">HAPUS PERMANEN</button>
     <button class="menu-opt" onclick="closeModal()" style="color:#fff; background:#333">TUTUP</button>
   </div>
 </div>
 
 <script>
-// INDUK DATA STORAGE
-let journal = JSON.parse(localStorage.getItem('rr-ultimate-final-storage')) || [];
+const BLUEPRINT_DEFAULTS = {
+    XAUUSD: { p: 2641.99, pips: 500 }, EURUSD: { p: 1.0850, pips: 300 }, GBPUSD: { p: 1.2650, pips: 300 }, USDJPY: { p: 150.00, pips: 400 }, AUDUSD: { p: 0.6550, pips: 200 }, EURGBP: { p: 0.8550, pips: 200 }, NZDUSD: { p: 0.6150, pips: 200 }, USDCHF: { p: 0.8850, pips: 200 }, AUDJPY: { p: 98.50, pips: 300 }, CADJPY: { p: 110.00, pips: 300 }, NZDJPY: { p: 91.50, pips: 300 }, USDCAD: { p: 1.3550, pips: 300 }, CHFJPY: { p: 170.00, pips: 400 }, EURJPY: { p: 162.50, pips: 400 }, GBPJPY: { p: 190.00, pips: 400 }, EURNZD: { p: 1.7850, pips: 400 }
+};
+
+let journal = JSON.parse(localStorage.getItem('v41-master-final-verified-report')) || [];
 let currentId = null;
 
-// NOTIFICATION LOGIC
-function showToast(msg = "Signal Copied! 📓") {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2000);
+function formatFullTime(date) {
+    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+    return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()} - ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')} WIB`;
 }
 
-// SHARE PERFORMANCE SUMMARY (V41 FULL QUALITY)
-window.shareSummary = function() {
-    const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-    const now = new Date();
-    const fM = document.getElementById('filterMonth').value;
-    const fY = document.getElementById('filterYear').value;
-    let labelDate = (fM === 'all') ? `${monthNames[now.getMonth()]} ${now.getFullYear()}` : `${monthNames[fM]} ${fY}`;
+function showToast(msg) {
+    const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+}
 
+function getGoldenSuggest(pos, op, slRaw, d) {
+    const vOP = parseFloat(op.replace(',', '.'));
+    const slClean = slRaw.split(' ')[0].replace(',', '.');
+    const vSL = parseFloat(slClean);
+    const range = vOP - vSL;
+    const s1 = (vSL + (range * 0.3)).toFixed(d).replace('.', ',');
+    const s2 = (vSL + (range * 0.7)).toFixed(d).replace('.', ',');
+    return (pos === 'BUY') ? `${s1} - ${s2}` : `${s2} - ${s1}`;
+}
+
+// PREMIUM SUMMARY WITH SUPPORT LINK
+window.shareDailySummary = function() {
+    const btn = document.getElementById('btnShareDaily');
+    if(btn.classList.contains('btn-locked')) return alert("Selesaikan trade OPEN.");
+
+    const fD = document.getElementById('filterDay').value, fM = document.getElementById('filterMonth').value, fY = document.getElementById('filterYear').value;
     const filtered = journal.filter(t => {
         const d = new Date(t.rawDate);
-        return (fM === 'all' || d.getMonth().toString() === fM) && (fY === 'all' || d.getFullYear().toString() === fY);
+        return (d.getDate().toString() === fD) && (d.getMonth().toString() === fM) && (d.getFullYear().toString() === fY);
     });
+
+    if(filtered.length === 0) return alert("Data kosong.");
+
+    const winC = filtered.filter(t => t.status === 'PROFIT').length;
+    const lossC = filtered.filter(t => t.status === 'LOSS').length;
+    const bepC = filtered.filter(t => t.status === 'BEP').length;
+    const canC = filtered.filter(t => t.status === 'CANCEL').length;
     
     let winP = 0, lossP = 0;
     filtered.forEach(t => {
-        if(t.status==='PROFIT') winP += parseFloat(t.rewardPips);
-        if(t.status==='LOSS') lossP += parseFloat(t.riskPips);
+        if(t.status === 'PROFIT') winP += parseFloat(t.rewardPips);
+        if(t.status === 'LOSS') lossP += parseFloat(t.riskPips);
     });
 
-    const text = `📊 TRADING PERFORMANCE SUMMARY
-Periode: ${labelDate}
-----------------------------
-SIGNAL: ${document.getElementById('statSignal').innerText}
-PROFIT: ${document.getElementById('statProfit').innerText}
-LOSS: ${document.getElementById('statLoss').innerText}
-WINRATE: ${document.getElementById('statWinrate').innerText}
-PF: ${document.getElementById('statPF').innerText} [${document.getElementById('statPFLabel').innerText}]
-PROFIT PIPS: +${winP.toFixed(1)}
-RISK PIPS: -${lossP.toFixed(1)}
-NET PIPS: ${document.getElementById('statNet').innerText}
-----------------------------
-Generated by FOREXEMAS V4.1`;
-
-    navigator.clipboard.writeText(text).then(() => showToast("Summary Copied! 📢"));
+    const wr = (winC + lossC + bepC) > 0 ? ((winC / (winC + lossC + bepC)) * 100).toFixed(1) : "0.0";
+    
+    const text = `📊 DAILY PERFORMANCE REPORT
+Tanggal: ${fD}/${parseInt(fM)+1}/${fY}
+-------------------------------
+TOTAL SIGNAL  : ${filtered.length} ✅
+-------------------------------
+WIN / PROFIT  : ${winC}
+LOSS / RISK   : ${lossC}
+BEP / SL+     : ${bepC}
+CANCEL/EXPRD  : ${canC}
+-------------------------------
+NET PIPS      : ${(winP - lossP).toFixed(1)}
+WIN RATE      : ${wr}%
+-------------------------------
+DETAIL & SUPPORT:
+https://forexemas.myr.id/support
+-------------------------------
+Generated by V41 Induk Master`;
+    
+    navigator.clipboard.writeText(text).then(() => showToast("Daily Report Disalin! 📢"));
 };
 
-// STATE MANAGEMENT
-window.exportData = function() {
-    if(journal.length === 0) return alert("Belum ada data.");
-    const blob = new Blob([JSON.stringify(journal, null, 2)], { type: "application/json" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = `Backup_Jurnal_${new Date().toLocaleDateString('id-ID')}.json`;
-    link.click(); showToast("Data Downloaded! 💾");
-};
-window.triggerImport = function() { document.getElementById('importInput').click(); };
-
-// GLOBAL CONTROL FUNCTIONS
-window.copyJournalRow = function(id) {
-    const t = journal.find(item => item.id == id);
+window.copyJournalRow = function(id, manualData = null) {
+    const t = manualData || journal.find(item => item.id == id);
     if (!t) return;
-    let res = (t.status === 'PROFIT') ? "Profit 🟢" : (t.status === 'LOSS') ? "Loss 🔴" : (t.status === 'BEP') ? "BEP / SL+ 🔵" : (t.status === 'CANCEL') ? "Cancelled ⚪" : "Open 🟡";
-    const shareText = `📓 TRADE [${t.tradeId}]\nPair: ${t.pair} (${t.pos})\nEntry: ${t.op}\nSL: ${t.sl} (-${t.riskPips})\nTP: ${t.tp} (+${t.rewardPips})\nRRR: 1:${t.rrr}\n----------------------\nTerbit: ${t.dateDisplay}\nExpired: ${t.expiryDisplay} (${t.expiryHrs}h)\nHasil: ${res}`;
-    navigator.clipboard.writeText(shareText).then(() => showToast());
+    const dec = (t.pair === 'XAUUSD' || t.pair.includes('JPY')) ? 2 : 5;
+    const suggest = getGoldenSuggest(t.pos, t.op, t.sl, dec);
+    const text = `📓 TRADE [${t.tradeId}] ${t.stars}\nPair: ${t.pair} (${t.pos})\nEntry: ${t.op}\nGolden Area: ${suggest}\nSL: ${t.sl}\nTP: ${t.tp} (+${t.rewardPips} pips)\nRRR: 1:${t.rrr}\nAlasan: ${t.reason || '-'}\n---------------------------------\nTerbit: ${t.dateDisplay}\nExpired: ${t.expiryDisplay}\nHasil: ${t.status}`;
+    navigator.clipboard.writeText(text).then(() => showToast("Sinyal Disalin!"));
+};
+
+window.exportData = function() {
+    const blob = new Blob([JSON.stringify(journal, null, 2)], { type: "application/json" });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = `V41_Backup.json`; a.click();
+};
+
+window.triggerImport = function() { document.getElementById('importInput').click(); };
+window.handleImport = function(e) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+        try { journal = JSON.parse(ev.target.result); window.saveAndRender(); showToast("Import Sukses!"); } catch(err) { alert("Format Salah!"); }
+    };
+    reader.readAsText(file);
+};
+
+window.deleteFiltered = function() { if(confirm("Reset database terfilter?")) { 
+    const d = document.getElementById('filterDay').value, m = document.getElementById('filterMonth').value, y = document.getElementById('filterYear').value;
+    journal = journal.filter(t => {
+        const dt = new Date(t.rawDate);
+        return !((dt.getDate().toString() === d) && (dt.getMonth().toString() === m) && (dt.getFullYear().toString() === y));
+    });
+    window.saveAndRender(); 
+}};
+
+window.saveAndRender = function() {
+    localStorage.setItem('v41-master-final-verified-report', JSON.stringify(journal));
+    window.renderJournal();
+};
+
+window.updateDayOptions = function() {
+    const fM = document.getElementById('filterMonth').value, fY = document.getElementById('filterYear').value, selDay = document.getElementById('filterDay');
+    const today = new Date();
+    const prevVal = selDay.value || today.getDate().toString();
+    const year = fY === 'all' ? today.getFullYear() : parseInt(fY);
+    const days = new Date(year, parseInt(fM) + 1, 0).getDate();
+    let html = '';
+    for(let i=1; i<=days; i++) html += `<option value="${i}">${i}</option>`;
+    selDay.innerHTML = html;
+    if([...selDay.options].some(o => o.value === prevVal)) selDay.value = prevVal;
+};
+
+window.renderJournal = function() {
+    const fD = document.getElementById('filterDay').value, fM = document.getElementById('filterMonth').value, fY = document.getElementById('filterYear').value;
+    const filtered = journal.filter(t => {
+        const d = new Date(t.rawDate);
+        return (d.getDate().toString() === fD) && (d.getMonth().toString() === fM) && (d.getFullYear().toString() === fY);
+    });
+
+    const opens = filtered.filter(t => t.status === 'OPEN');
+    document.getElementById('openWarning').style.display = opens.length > 0 ? 'block' : 'none';
+    document.getElementById('btnShareDaily').className = opens.length > 0 ? 'btn-state btn-locked' : 'btn-state';
+
+    const wins = filtered.filter(t => t.status === 'PROFIT'), 
+          losses = filtered.filter(t => t.status === 'LOSS'), 
+          beps = filtered.filter(t => t.status === 'BEP');
+    let winP = 0, lossP = 0;
+    wins.forEach(w => winP += parseFloat(w.rewardPips));
+    losses.forEach(l => lossP += parseFloat(l.riskPips));
+
+    document.getElementById('statSignal').textContent = filtered.length;
+    document.getElementById('statProfit').textContent = wins.length;
+    document.getElementById('statLoss').textContent = losses.length;
+    document.getElementById('statBEP').textContent = beps.length;
+    document.getElementById('statCancel').textContent = filtered.filter(t => t.status === 'CANCEL').length;
+    document.getElementById('statNet').textContent = (winP - lossP).toFixed(1);
+
+    document.getElementById('journalBody').innerHTML = filtered.map(t => `
+        <tr>
+            <td><b>${t.tradeId}</b><br><small>${t.dateDisplay}</small></td>
+            <td><b>${t.pair}</b><br><small>OP: ${t.op}</small></td>
+            <td><span class="badge ${t.pos === 'BUY' ? 'bg-buy' : 'bg-sell'}">${t.pos}</span></td>
+            <td><b>1:${t.rrr}</b><br><small>P:+${t.rewardPips}|L:-${t.riskPips}</small></td>
+            <td><small>${t.expiryDisplay}</small></td>
+            <td class="status-${t.status.toLowerCase()}"><b>${t.status}</b></td>
+            <td><button class="btn-action" onclick="copyJournalRow('${t.id}')">📋</button> <button class="btn-action" onclick="openModal('${t.id}')">⚙️</button></td>
+        </tr>`).join('');
 };
 
 window.openModal = function(id) { currentId = id; document.getElementById('statusModal').style.display = 'flex'; };
 window.closeModal = function() { document.getElementById('statusModal').style.display = 'none'; };
-window.updateJournalStatus = function(s) {
+window.updateStatus = function(s) {
     journal = journal.map(t => t.id == currentId ? {...t, status: s} : t);
-    localStorage.setItem('rr-ultimate-final-storage', JSON.stringify(journal));
-    window.renderJournal(); window.closeModal();
+    window.saveAndRender(); window.closeModal();
 };
-window.deleteJournalItem = function() {
-    if (confirm('Hapus trade ini?')) {
-        journal = journal.filter(t => t.id != currentId);
-        localStorage.setItem('rr-ultimate-final-storage', JSON.stringify(journal));
-        window.renderJournal(); window.closeModal();
-    }
-};
-window.deleteFilteredData = function() {
-    if (confirm('Hapus data terfilter?')) {
-        const fM = document.getElementById('filterMonth').value, fY = document.getElementById('filterYear').value;
-        journal = journal.filter(t => { const d = new Date(t.rawDate); return !((fM === 'all' || d.getMonth().toString() === fM) && (fY === 'all' || d.getFullYear().toString() === fY)); });
-        localStorage.setItem('rr-ultimate-final-storage', JSON.stringify(journal));
-        window.renderJournal();
-    }
+window.deleteItem = function() {
+    if(confirm("Hapus trade?")) { journal = journal.filter(t => t.id != currentId); window.saveAndRender(); window.closeModal(); }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    const DUMMY = { AUDUSD:0.666, EURGBP:0.8695, NZDUSD:0.6205, USDCHF:0.915, AUDJPY:99.2, CADJPY:110.45, EURUSD:1.0865, GBPUSD:1.263, NZDJPY:93.15, USDCAD:1.336, CHFJPY:136.5, EURJPY:162.5, EURNZD:1.688, GBPJPY:188.5, USDJPY:149.8, XAUUSD:2641.99 };
-    const DEFAULT_PIPS = { AUDUSD:200, EURGBP:200, NZDUSD:200, USDCHF:200, AUDJPY:300, CADJPY:300, EURUSD:300, GBPUSD:300, NZDJPY:300, USDCAD:300, CHFJPY:400, EURJPY:400, EURNZD:400, GBPJPY:400, USDJPY:400, XAUUSD:500 };
-
     const el = {
-        theme: document.getElementById('theme'), pair: document.getElementById('pair'), op: document.getElementById('op'), tp: document.getElementById('tp'),
-        tpPips: document.getElementById('tpPips'), rrr: document.getElementById('rrr'), customExpiry: document.getElementById('customExpiry'),
-        position: document.getElementById('position'), slInfo: document.getElementById('slInfo'), slLabel: document.getElementById('slLabel'),
-        tableBody: document.getElementById('tableBody'), journalBody: document.getElementById('journalBody'),
-        btnTabCalc: document.getElementById('btnTabCalc'), btnTabJournal: document.getElementById('btnTabJournal'),
-        sectionCalc: document.getElementById('sectionCalc'), sectionJournal: document.getElementById('sectionJournal'),
-        filterMonth: document.getElementById('filterMonth'), filterYear: document.getElementById('filterYear'),
-        statSignal: document.getElementById('statSignal'), statProfit: document.getElementById('statProfit'),
-        statLoss: document.getElementById('statLoss'), statWinrate: document.getElementById('statWinrate'),
-        statPF: document.getElementById('statPF'), statPFLabel: document.getElementById('statPFLabel'),
-        statNet: document.getElementById('statNet'), saveBtn: document.getElementById('saveBtn'), importInput: document.getElementById('importInput')
+        op: document.getElementById('op'), slInfo: document.getElementById('slInfo'), tp: document.getElementById('tp'),
+        rrr: document.getElementById('rrr'), tpPips: document.getElementById('tpPips'),
+        pair: document.getElementById('pair'), pos: document.getElementById('position'),
+        stars: document.getElementById('starOption'), reason: document.getElementById('entryReason'),
+        expiry: document.getElementById('customExpiry'), theme: document.getElementById('theme'),
+        fDay: document.getElementById('filterDay'), fMonth: document.getElementById('filterMonth'), fYear: document.getElementById('filterYear'),
+        btnSave: document.getElementById('saveJournalBtn'), btnCopy: document.getElementById('copyOnlyBtn'),
+        btnTabCalc: document.getElementById('btnTabCalc'), btnTabJournal: document.getElementById('btnTabJournal')
     };
 
-    function getPipVal(p) { return p === 'XAUUSD' ? 0.1 : p.includes('JPY') ? 0.01 : 0.0001; }
-    function getDec(p) { return (p === 'XAUUSD' || p.includes('JPY')) ? 2 : 5; }
-    function formatF(n, d) { return isNaN(n) ? '' : n.toFixed(d).replace('.', ','); }
+    const today = new Date();
+    el.fMonth.value = today.getMonth();
+    const yrs = [...new Set([today.getFullYear(), ...journal.map(t => new Date(t.rawDate).getFullYear())])];
+    el.fYear.innerHTML = yrs.map(y => `<option value="${y}">${y}</option>`).join('');
+    el.fYear.value = today.getFullYear();
+    window.updateDayOptions();
+    el.fDay.value = today.getDate();
 
     function updateAll() {
-        const pr = el.pair.value, pv = getPipVal(pr), d = getDec(pr);
-        let OP = parseFloat(el.op.value.replace(',', '.')) || DUMMY[pr];
-        const mult = Math.max(1, parseFloat(el.rrr.value) || 1);
-        const pips = parseFloat(el.tpPips.value) || DEFAULT_PIPS[pr];
-        const TP = el.position.value === 'buy' ? OP + (pips * pv) : OP - (pips * pv);
-        const riskPips = pips / mult;
-        const SL = el.position.value === 'buy' ? OP - (riskPips * pv) : OP + (riskPips * pv);
-        el.tp.value = formatF(TP, d);
-        el.slInfo.value = `SL: ${formatF(SL, d)} | Risk: ${riskPips.toFixed(1)} pips`;
-        if (riskPips < 35) el.slInfo.classList.add('risk-alert');
-        else el.slInfo.classList.remove('risk-alert');
-        el.tableBody.innerHTML = `<tr><td>${pr}</td><td><span class="badge ${el.position.value === 'buy' ? 'bg-buy' : 'bg-sell'}">${el.position.value.toUpperCase()}</span></td><td>${formatF(OP, d)}</td><td>${formatF(TP, d)}</td><td>+${pips}</td><td>x${mult}</td></tr>`;
+        const p = el.pair.value, pv = p === 'XAUUSD' ? 0.1 : (p.includes('JPY') ? 0.01 : 0.0001), d = (p === 'XAUUSD' || p.includes('JPY')) ? 2 : 5;
+        if (el.op.value === "") el.op.value = BLUEPRINT_DEFAULTS[p].p.toFixed(d).replace('.', ',');
+        if (el.tpPips.value === "") el.tpPips.value = BLUEPRINT_DEFAULTS[p].pips;
+        let vOP = parseFloat(el.op.value.replace(',', '.')) || 0, pips = parseFloat(el.tpPips.value) || 0, mult = parseFloat(el.rrr.value) || 1;
+        const riskVal = (pips / mult).toFixed(1), vTP = el.pos.value === 'buy' ? vOP + (pips * pv) : vOP - (pips * pv), vSL = el.pos.value === 'buy' ? vOP - (riskVal * pv) : vOP + (riskVal * pv);
+        el.tp.value = vTP.toFixed(d).replace('.', ',');
+        el.slInfo.value = `${vSL.toFixed(d).replace('.', ',')} (-${riskVal} pips)`;
+        
+        document.getElementById('previewBody').innerHTML = `<tr><td>${p}</td><td>${el.pos.value.toUpperCase()}</td><td>${el.op.value}</td><td>${vSL.toFixed(d).replace('.', ',')}</td><td>${el.tp.value}</td><td>1:${mult}</td></tr>`;
     }
 
-    // WINRATE LOGIC: Win / (Win + Loss + BEP)
-    window.renderJournal = function() {
-        const fM = el.filterMonth.value, fY = el.filterYear.value;
-        const filtered = journal.filter(t => { const d = new Date(t.rawDate); return (fM === 'all' || d.getMonth().toString() === fM) && (fY === 'all' || d.getFullYear().toString() === fY); });
-        const wins = filtered.filter(t => t.status === 'PROFIT'), losses = filtered.filter(t => t.status === 'LOSS'), beps = filtered.filter(t => t.status === 'BEP');
-        const totalCalc = wins.length + losses.length + beps.length;
-        const wr = totalCalc > 0 ? ((wins.length / totalCalc) * 100).toFixed(1) : 0;
-        let winP = 0, lossP = 0; wins.forEach(w => winP += parseFloat(w.rewardPips)); losses.forEach(l => lossP += parseFloat(l.riskPips));
-        const pfVal = lossP > 0 ? (winP / lossP) : (winP > 0 ? 9.9 : 0);
-        let pfLabel = totalCalc === 0 ? "NO DATA" : (pfVal >= 2.0 ? "SANGAT SEHAT" : (pfVal >= 1.5 ? "SEHAT" : (pfVal >= 1.0 ? "WASPADA" : "BURUK")));
-        let pfColor = pfVal >= 1.5 ? "#3fb950" : (pfVal >= 1.0 ? "#d29922" : "#f85149");
-
-        el.statSignal.textContent = filtered.length; el.statProfit.textContent = wins.length;
-        el.statLoss.textContent = losses.length; el.statWinrate.textContent = wr + '%';
-        el.statPF.textContent = (lossP === 0 && winP > 0) ? "MAX" : pfVal.toFixed(2);
-        el.statPFLabel.textContent = pfLabel; el.statPFLabel.style.color = pfColor;
-        el.statNet.textContent = (winP - lossP).toFixed(1);
-
-        el.journalBody.innerHTML = filtered.map(t => {
-            const isEx = (t.status === 'BEP' || t.status === 'CANCEL');
-            return `<tr><td><b>${t.tradeId}</b><span class="sub-info-text">${t.dateDisplay}</span></td>
-                <td><b>${t.pair}</b><span class="sub-info-text">OP: ${t.op}</span></td>
-                <td><span class="badge ${t.pos === 'BUY' ? 'bg-buy' : 'bg-sell'}">${t.pos}</span></td>
-                <td><b>1:${t.rrr}</b><span class="sub-info-text">SL: ${t.sl} (-${t.riskPips})</span></td>
-                <td class="status-${t.status.toLowerCase()}"><b>${t.status}</b><span class="sub-info-text">TP: ${t.tp} (${isEx ? '-' : '+' + t.rewardPips})</span></td>
-                <td><button class="btn-action" onclick="copyJournalRow('${t.id}')">📋</button> <button class="btn-action" onclick="openModal('${t.id}')">⚙️</button></td></tr>`;
-        }).join('');
+    el.pair.onchange = () => { el.op.value = ""; el.tpPips.value = ""; updateAll(); };
+    el.btnCopy.onclick = () => window.copyJournalRow(null, createTrade());
+    el.btnSave.onclick = () => {
+        const d = createTrade(); journal.unshift(d); window.saveAndRender();
+        window.copyJournalRow(d.id); showToast("Sinyal & Jurnal Update! 📓");
     };
-
-    el.importInput.onchange = (e) => {
-        const file = e.target.files[0]; if(!file) return;
-        const reader = new FileReader(); reader.onload = (event) => {
-            try { const imported = JSON.parse(event.target.result); if(Array.isArray(imported)) { journal = imported; localStorage.setItem('rr-ultimate-final-storage', JSON.stringify(journal)); populateYears(); renderJournal(); showToast("Data Imported! 📂"); } } catch(err) { alert("Invalid JSON."); }
-        }; reader.readAsText(file);
-    };
-
-    function populateYears() { const yrs = [...new Set(journal.map(t => new Date(t.rawDate).getFullYear()))]; el.filterYear.innerHTML = '<option value="all">Semua Tahun</option>' + yrs.map(y => `<option value="${y}">${y}</option>`).join(''); }
-    el.btnTabCalc.onclick = () => { el.sectionCalc.style.display = 'block'; el.sectionJournal.style.display = 'none'; el.btnTabCalc.classList.add('active'); el.btnTabJournal.classList.remove('active'); };
-    el.btnTabJournal.onclick = () => { el.sectionCalc.style.display = 'none'; el.sectionJournal.style.display = 'block'; el.btnTabJournal.classList.add('active'); el.btnTabCalc.classList.remove('active'); populateYears(); renderJournal(); };
-
-    el.saveBtn.onclick = () => {
-        const mult = Math.max(1, parseFloat(el.rrr.value) || 1), pips = parseFloat(el.tpPips.value) || DEFAULT_PIPS[el.pair.value];
-        const now = new Date(), fmt = { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit' };
-        const entry = { id: Date.now(), tradeId: "TRX-" + Math.floor(100000 + Math.random() * 900000), rawDate: now.toISOString(), dateDisplay: now.toLocaleString('id-ID', fmt), expiryDisplay: new Date(now.getTime() + (parseInt(el.customExpiry.value)*3600000)).toLocaleString('id-ID', fmt), expiryHrs: el.customExpiry.value, pair: el.pair.value, pos: el.position.value.toUpperCase(), rrr: mult, op: el.op.value, tp: el.tp.value, sl: el.slInfo.value.split('|')[0].replace('SL:','').trim(), rewardPips: pips, riskPips: (pips/mult).toFixed(1), status: 'OPEN' };
-        journal.unshift(entry); localStorage.setItem('rr-ultimate-final-storage', JSON.stringify(journal));
-        window.copyJournalRow(entry.id); el.saveBtn.textContent = 'SAVED & COPIED!'; setTimeout(() => el.saveBtn.textContent = 'SAVE TO JOURNAL & COPY SIGNAL', 1500);
-        populateYears(); if(el.sectionJournal.style.display === 'block') window.renderJournal();
-    };
-
-    el.theme.onchange = () => { document.body.className = el.theme.value; };
-    el.pair.onchange = () => { el.op.value = formatF(DUMMY[el.pair.value], getDec(el.pair.value)); updateAll(); };
-    [el.op, el.tpPips, el.rrr, el.position, el.filterMonth, el.filterYear].forEach(i => { if (i) i.oninput = () => { if (i.id.startsWith('filter')) window.renderJournal(); else updateAll(); }; });
-    el.op.value = "2641,99"; el.tpPips.value = 500; updateAll();
+    function createTrade() {
+        const now = new Date(), exp = new Date(now.getTime() + (el.expiry.value * 3600000));
+        return { id: Date.now(), tradeId: "TRX-" + Math.floor(100000 + Math.random()*900000), rawDate: now.toISOString(), dateDisplay: formatFullTime(now), expiryDisplay: formatFullTime(exp), expiryHrs: el.expiry.value, pair: el.pair.value, pos: el.pos.value.toUpperCase(), rrr: el.rrr.value, op: el.op.value, tp: el.tp.value, sl: el.slInfo.value, rewardPips: el.tpPips.value, riskPips: (el.tpPips.value/el.rrr.value).toFixed(1), status: 'OPEN', stars: el.stars.value, reason: el.reason.value };
+    }
+    el.btnTabCalc.onclick = () => { document.getElementById('sectionCalc').style.display='block'; document.getElementById('sectionJournal').style.display='none'; el.btnTabCalc.classList.add('active'); el.btnTabJournal.classList.remove('active'); };
+    el.btnTabJournal.onclick = () => { document.getElementById('sectionCalc').style.display='none'; document.getElementById('sectionJournal').style.display='block'; el.btnTabJournal.classList.add('active'); el.btnTabCalc.classList.remove('active'); window.renderJournal(); };
+    el.theme.onchange = () => document.body.className = el.theme.value;
+    [el.op, el.tpPips, el.rrr, el.pos, el.customExpiry].forEach(i => i.oninput = updateAll);
+    updateAll();
 });
 </script>
 </body>
