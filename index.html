@@ -3,129 +3,214 @@
 <head>
 <meta charset="utf-8"/>
 <title>V41 FOREXEMAS - Performance Engine 2026</title>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --gold-dark: #6b5200; --gold-mid: #c7a420; --gold-light: #ffe17b;
-  --neon-blue: #00f6ff; --neon-dark: #08121b; --warn-red: #ff3e3e;
-  --bg-input: rgba(0,0,0,0.5);
+  --gold-dark:#6b5200;--gold-mid:#c7a420;--gold-light:#ffe17b;
+  --neon-blue:#00f6ff;--warn-red:#ff3e3e;--bg-input:rgba(0,0,0,0.45);
 }
-* { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
-body { margin: 0; font-family: 'Poppins', sans-serif; line-height: 1.3; padding: 10px; min-height: 100vh; transition: 0.5s; }
-.card { width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 20px; padding: 15px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+*{box-sizing:border-box;outline:none;-webkit-tap-highlight-color:transparent;}
+body{margin:0;font-family:'Poppins',sans-serif;line-height:1.3;padding:10px;min-height:100vh;transition:background 0.4s,color 0.4s;}
 
-.theme-switcher { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px; }
-.theme-btn { padding: 10px; border-radius: 10px; border: 1px solid rgba(128,128,128,0.3); cursor: pointer; font-weight: 800; font-size: 9px; text-transform: uppercase; background: rgba(0,0,0,0.2); color: inherit; transition: 0.3s; }
+/* ── THEMES ── */
+body.gold{background:#0b0a07;color:#fff;}
+body.gold .card{background:#141108;border:1.5px solid var(--gold-mid);}
+body.gold nav button.active{background:var(--gold-mid);color:#000;border:none;}
+body.gold .theme-btn.active{border-color:var(--gold-mid);background:rgba(200,164,32,0.15);color:var(--gold-light);}
+body.gold label{color:var(--gold-light);}
+body.gold .primary-btn.main{background:linear-gradient(135deg,var(--gold-mid),var(--gold-light));color:#000;}
+body.gold .stat-item{border-bottom-color:var(--gold-mid);}
 
-nav { display: flex; gap: 6px; margin-bottom: 20px; }
-nav button { flex: 1; padding: 12px 5px; border-radius: 10px; border: 1px solid rgba(128,128,128,0.2); cursor: pointer; font-weight: 800; text-transform: uppercase; background: transparent; color: inherit; font-size: 10px; transition: 0.3s; }
+body.neon{background:#01080e;color:#fff;}
+body.neon .card{background:#05111b;border:1.5px solid var(--neon-blue);}
+body.neon nav button.active{background:var(--neon-blue);color:#000;border:none;}
+body.neon .theme-btn.active{border-color:var(--neon-blue);background:rgba(0,246,255,0.15);color:var(--neon-blue);}
+body.neon label{color:var(--neon-blue);}
+body.neon .primary-btn.main{background:linear-gradient(135deg,#0077aa,var(--neon-blue));color:#000;}
+body.neon .stat-item{border-bottom-color:var(--neon-blue);}
 
-body.gold { background: #0b0a07; color: #fff; }
-body.gold .card { background: #141108; border: 1.5px solid var(--gold-mid); }
-body.gold nav button.active { background: var(--gold-mid); color: #000; border: none; }
-body.gold .theme-btn.active { border-color: var(--gold-mid); background: rgba(200,164,32,0.15); color: var(--gold-light); }
-body.gold label { color: var(--gold-light); }
+/* ── LAYOUT ── */
+.card{width:100%;max-width:1100px;margin:0 auto;border-radius:20px;padding:15px;box-shadow:0 20px 60px rgba(0,0,0,0.6);}
+.theme-switcher{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px;}
+.theme-btn{padding:10px;border-radius:10px;border:1px solid rgba(128,128,128,0.3);cursor:pointer;font-weight:800;font-size:9px;text-transform:uppercase;background:rgba(0,0,0,0.2);color:inherit;transition:0.3s;}
+nav{display:flex;gap:6px;margin-bottom:20px;}
+nav button{flex:1;padding:12px 5px;border-radius:10px;border:1px solid rgba(128,128,128,0.2);cursor:pointer;font-weight:800;text-transform:uppercase;background:transparent;color:inherit;font-size:10px;transition:0.3s;}
+h1{font-size:1.2rem;margin:0 0 16px;font-weight:900;}
+@media(max-width:600px){h1{font-size:1rem;}.form-field{font-size:13px;padding:10px;}label{font-size:9px;}}
 
-body.neon { background: #01080e; color: #fff; }
-body.neon .card { background: #05111b; border: 1.5px solid var(--neon-blue); }
-body.neon nav button.active { background: var(--neon-blue); color: #000; border: none; }
-body.neon .theme-btn.active { border-color: var(--neon-blue); background: rgba(0,246,255,0.15); color: var(--neon-blue); }
-body.neon label { color: var(--neon-blue); }
+/* ── FORM ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;}
+.box{display:flex;flex-direction:column;}
+label{font-size:9px;margin-bottom:4px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;opacity:0.8;}
+.form-field{padding:12px;border-radius:10px;border:1px solid rgba(128,128,128,0.3);font-size:14px;background:var(--bg-input);color:inherit;width:100%;font-family:'Poppins',sans-serif;}
+.form-field[readonly]{background:rgba(128,128,128,0.1);border-style:dashed;}
+.form-field.invalid{border-color:var(--warn-red)!important;}
 
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+/* ── BUTTONS ── */
+.primary-btn{padding:14px;border:none;border-radius:12px;cursor:pointer;font-weight:800;font-size:10px;text-transform:uppercase;transition:0.3s;font-family:'Poppins',sans-serif;}
+.primary-btn:active{transform:scale(0.97);}
+.btn-row{display:flex;gap:10px;margin-top:15px;}
 
-@media (max-width: 600px) { h1 { font-size: 1.1rem; } .form-field { font-size: 13px; padding: 10px; } label { font-size: 9px; } }
+/* ── STATS ── */
+.stats-container{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:15px;scrollbar-width:none;}
+.stats-container::-webkit-scrollbar{display:none;}
+.stat-item{min-width:80px;flex:1;padding:10px 5px;border-radius:12px;background:rgba(255,255,255,0.05);text-align:center;border-bottom:2.5px solid rgba(128,128,128,0.3);}
+.stat-val{display:block;font-size:13px;font-weight:900;}
+.stat-label{font-size:7px;opacity:0.6;text-transform:uppercase;font-weight:700;}
 
-.box { display: flex; flex-direction: column; }
-label { font-size: 9px; margin-bottom: 4px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; }
-.form-field { padding: 12px; border-radius: 10px; border: 1px solid rgba(128,128,128,0.3); font-size: 14px; background: var(--bg-input); color: inherit; width: 100%; }
-.form-field[readonly] { background: rgba(128,128,128,0.1); border-style: dashed; }
+/* ── TABLE ── */
+.table-wrapper{overflow-x:auto;border-radius:12px;background:rgba(0,0,0,0.2);}
+table{width:100%;border-collapse:collapse;font-size:10px;min-width:700px;}
+th{padding:12px 8px;border-bottom:2px solid rgba(128,128,128,0.2);opacity:0.7;text-align:center;}
+td{padding:10px 5px;border-bottom:1px solid rgba(128,128,128,0.05);text-align:center;vertical-align:middle;}
+.status-profit{color:#3fb950!important;}
+.status-loss{color:#f85149!important;}
+.status-open{color:#f0a030!important;}
+.status-pending{color:#8b8b00!important;}
+.status-bep{color:#388bfd!important;}
+.status-cancel{color:#8b949e!important;}
+.badge{padding:3px 7px;border-radius:4px;font-weight:900;font-size:9px;}
+.bg-buy{background:#238636;color:#fff;}
+.bg-sell{background:#da3633;color:#fff;}
+.full-date{font-size:8px;opacity:0.5;display:block;margin-top:3px;}
+td button{background:none;border:none;cursor:pointer;font-size:14px;padding:2px 4px;}
 
-.primary-btn { padding: 14px; border: none; border-radius: 12px; cursor: pointer; font-weight: 800; font-size: 10px; text-transform: uppercase; transition: 0.3s; }
+/* ── TOAST ── */
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(150px);padding:12px 25px;background:#238636;border-radius:50px;z-index:9999;transition:0.4s;font-weight:800;font-size:12px;color:#fff;white-space:nowrap;}
+#toast.show{transform:translateX(-50%) translateY(0);}
 
-.stats-container { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; scrollbar-width: none; }
-.stat-item { min-width: 80px; flex: 1; padding: 10px 5px; border-radius: 12px; background: rgba(255,255,255,0.05); text-align: center; border-bottom: 2.5px solid rgba(128,128,128,0.3); }
-.stat-val { display: block; font-size: 13px; font-weight: 900; }
-.stat-label { font-size: 7px; opacity: 0.6; text-transform: uppercase; font-weight: 700; }
+/* ── OPEN WARNING ── */
+#openWarning{background:rgba(255,62,62,0.12);border:1px solid var(--warn-red);color:#ff8e8e;padding:10px;border-radius:10px;font-size:10px;font-weight:700;margin-bottom:15px;text-align:center;display:none;}
 
-.table-wrapper { overflow-x: auto; border-radius: 12px; background: rgba(0,0,0,0.2); }
-table { width: 100%; border-collapse: collapse; font-size: 10px; min-width: 750px; }
-th { padding: 12px 8px; border-bottom: 2px solid rgba(128,128,128,0.2); opacity: 0.7; }
-td { padding: 10px 5px; border-bottom: 1px solid rgba(128,128,128,0.05); text-align: center; }
+/* ── MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:1000;justify-content:center;align-items:center;backdrop-filter:blur(8px);}
+.modal-overlay.open{display:flex;}
+.modal-content{background:#111;width:300px;border-radius:24px;border:1px solid #333;overflow:hidden;}
+.menu-opt{display:block;width:100%;padding:18px;border:none;background:none;color:white;font-weight:700;cursor:pointer;border-bottom:1px solid #222;font-family:'Poppins',sans-serif;font-size:13px;}
+.menu-opt:hover{background:rgba(255,255,255,0.05);}
 
-.status-profit { color: #3fb950 !important; }
-.status-loss { color: #f85149 !important; }
-.badge { padding: 3px 6px; border-radius: 4px; font-weight: 900; }
-.bg-buy { background: #238636; color: #fff; }
-.bg-sell { background: #da3633; color: #fff; }
-
-.full-date { font-size: 8px; opacity: 0.5; display: block; margin-top: 3px; }
-
-#toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(150px); padding: 12px 25px; background: #238636; border-radius: 50px; z-index: 9999; transition: 0.4s; font-weight: 800; font-size: 12px; }
-#toast.show { transform: translateX(-50%) translateY(0); }
-
-#openWarning { background: rgba(255, 62, 62, 0.12); border: 1px solid var(--warn-red); color: #ff8e8e; padding: 10px; border-radius: 10px; font-size: 10px; font-weight: 700; margin-bottom: 15px; text-align: center; display: none; }
-
-.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
-.modal-content { background: #111; width: 300px; border-radius: 24px; border: 1px solid #333; overflow: hidden; }
-.menu-opt { display: block; width: 100%; padding: 18px; border: none; background: none; color: white; font-weight: 700; cursor: pointer; border-bottom: 1px solid #222; }
+/* ── PREVIEW SECTION ── */
+.preview-section{margin-top:20px;}
+.preview-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;opacity:0.5;margin-bottom:8px;}
 </style>
 </head>
 <body class="gold">
 
-<div id="toast">Disalin! 📓</div>
+<div id="toast">✅ Berhasil!</div>
 
 <div class="card">
   <div class="theme-switcher">
-    <button class="theme-btn active" onclick="setTheme('gold', this)">Luxury Gold</button>
-    <button class="theme-btn" onclick="setTheme('neon', this)">Blue Neon</button>
+    <button class="theme-btn active" onclick="setTheme('gold',this)">✨ Luxury Gold</button>
+    <button class="theme-btn" onclick="setTheme('neon',this)">💎 Blue Neon</button>
   </div>
 
   <nav>
-    <button id="btnTabCalc" class="active">Kalkulator</button>
-    <button id="btnTabJournal">Jurnal</button>
+    <button id="btnTabCalc" class="active" onclick="switchTab('calc')">📊 Kalkulator</button>
+    <button id="btnTabJournal" onclick="switchTab('journal')">📓 Jurnal</button>
   </nav>
 
+  <!-- ══ TAB KALKULATOR ══ -->
   <div id="sectionCalc">
     <h1>SigCalc V.41 Engine</h1>
+
     <div class="grid-2">
-      <div class="box"><label>Mark Quality</label>
-        <select id="starOption" class="form-field"><option value="⭐⭐⭐">3 Stars</option><option value="⭐⭐⭐⭐⭐" selected>5 Stars</option></select>
-      </div>
-      <div class="box"><label>Pair Selection</label>
-        <select id="pair" class="form-field">
-          <optgroup label="Grup 2"><option value="AUDUSD">AUDUSD</option><option value="EURGBP">EURGBP</option><option value="NZDUSD">NZDUSD</option><option value="USDCHF">USDCHF</option></optgroup>
-          <optgroup label="Grup 1.5"><option value="AUDJPY">AUDJPY</option><option value="CADJPY">CADJPY</option><option value="EURUSD">EURUSD</option><option value="GBPUSD">GBPUSD</option><option value="NZDJPY">NZDJPY</option><option value="USDCAD">USDCAD</option></optgroup>
-          <optgroup label="Grup 1"><option value="CHFJPY">CHFJPY</option><option value="EURJPY">EURJPY</option><option value="EURNZD">EURNZD</option><option value="GBPJPY">GBPJPY</option><option value="USDJPY">USDJPY</option></optgroup>
-          <optgroup label="Default"><option value="XAUUSD" selected>XAUUSD</option></optgroup>
+      <div class="box">
+        <label>Mark Quality</label>
+        <select id="starOption" class="form-field">
+          <option value="⭐⭐⭐">3 Stars</option>
+          <option value="⭐⭐⭐⭐⭐" selected>5 Stars</option>
         </select>
       </div>
-      <div class="box"><label>Entry Price</label><input id="op" class="form-field" type="text" value="5000,00"></div>
-      <div class="box"><label>RRR Ratio</label><input id="rrr" class="form-field" type="number" step="0.1" value="1"></div>
-      <div class="box"><label>Stop Loss</label><input id="slInfo" class="form-field" readonly></div>
-      <div class="box"><label>Take Profit</label><input id="tp" class="form-field" readonly></div>
-      <div class="box"><label>TP Pips Plan</label><input id="tpPips" class="form-field" type="number" value="500"></div>
-      <div class="box"><label>Side</label>
-        <select id="position" class="form-field"><option value="buy">🟢 BUY</option><option value="sell">🔴 SELL</option></select>
+      <div class="box">
+        <label>Pair Selection</label>
+        <select id="pair" class="form-field">
+          <optgroup label="Grup 2">
+            <option value="AUDUSD">AUDUSD</option>
+            <option value="EURGBP">EURGBP</option>
+            <option value="NZDUSD">NZDUSD</option>
+            <option value="USDCHF">USDCHF</option>
+          </optgroup>
+          <optgroup label="Grup 1.5">
+            <option value="AUDJPY">AUDJPY</option>
+            <option value="CADJPY">CADJPY</option>
+            <option value="EURUSD">EURUSD</option>
+            <option value="GBPUSD">GBPUSD</option>
+            <option value="NZDJPY">NZDJPY</option>
+            <option value="USDCAD">USDCAD</option>
+          </optgroup>
+          <optgroup label="Grup 1">
+            <option value="CHFJPY">CHFJPY</option>
+            <option value="EURJPY">EURJPY</option>
+            <option value="EURNZD">EURNZD</option>
+            <option value="GBPJPY">GBPJPY</option>
+            <option value="USDJPY">USDJPY</option>
+          </optgroup>
+          <optgroup label="Komoditas">
+            <option value="XAUUSD" selected>XAUUSD</option>
+          </optgroup>
+        </select>
       </div>
-      <div class="box"><label>Alasan Entry</label><input id="entryReason" class="form-field" type="text" placeholder="EMA / SnR"></div>
-      <div class="box"><label>Expired (Jam)</label><input id="customExpiry" class="form-field" type="number" value="2"></div>
     </div>
 
-    <div style="display:flex; gap:10px; margin-top:15px;">
-        <button id="copyOnlyBtn" class="primary-btn" style="background:#333; color:#fff; flex:1">COPY CAPTION</button>
-        <button id="saveJournalBtn" class="primary-btn" style="flex:1.2; background:linear-gradient(135deg,var(--gold-mid),var(--gold-light)); color:#000;">SAVE JURNAL</button>
+    <div class="grid-2">
+      <div class="box">
+        <label>Side / Posisi</label>
+        <select id="position" class="form-field">
+          <option value="BUY">🟢 BUY</option>
+          <option value="SELL">🔴 SELL</option>
+        </select>
+      </div>
+      <div class="box">
+        <label>Entry Price (OP)</label>
+        <input id="op" class="form-field" type="text" placeholder="0.00" autocomplete="off"/>
+      </div>
+      <div class="box">
+        <label>TP Pips Plan</label>
+        <input id="tpPips" class="form-field" type="number" step="1" min="1" value="500"/>
+      </div>
+      <div class="box">
+        <label>RRR Ratio (1:X)</label>
+        <input id="rrr" class="form-field" type="number" step="0.1" min="0.1" value="1"/>
+      </div>
+      <div class="box">
+        <label>Stop Loss (auto)</label>
+        <input id="slInfo" class="form-field" readonly/>
+      </div>
+      <div class="box">
+        <label>Take Profit (auto)</label>
+        <input id="tp" class="form-field" readonly/>
+      </div>
+      <div class="box">
+        <label>Alasan Entry</label>
+        <input id="entryReason" class="form-field" type="text" placeholder="EMA / SnR / Pattern"/>
+      </div>
+      <div class="box">
+        <label>Expired (Jam)</label>
+        <input id="customExpiry" class="form-field" type="number" value="2" min="1" max="168"/>
+      </div>
     </div>
 
-    <div class="table-wrapper" style="margin-top:20px;">
+    <div id="calcError" style="display:none;background:rgba(255,62,62,0.12);border:1px solid var(--warn-red);color:#ff8e8e;padding:10px;border-radius:10px;font-size:10px;font-weight:700;margin-bottom:12px;text-align:center;"></div>
+
+    <div class="btn-row">
+      <button id="copyOnlyBtn" class="primary-btn" style="background:#333;color:#fff;flex:1">📋 COPY CAPTION</button>
+      <button id="saveJournalBtn" class="primary-btn main" style="flex:1.2">💾 SAVE JURNAL</button>
+    </div>
+
+    <div class="preview-section">
+      <div class="preview-label">Preview Signal</div>
+      <div class="table-wrapper">
         <table>
-          <thead><tr><th>Pair</th><th>Side</th><th>Entry</th><th>SL</th><th>TP</th><th>Ratio</th></tr></thead>
-          <tbody id="previewBody"></tbody>
+          <thead><tr><th>Pair</th><th>Side</th><th>Entry</th><th>SL</th><th>TP</th><th>Ratio</th><th>Risk Pips</th></tr></thead>
+          <tbody id="previewBody"><tr><td colspan="7" style="opacity:0.3;padding:16px;">Isi form untuk preview</td></tr></tbody>
         </table>
+      </div>
     </div>
   </div>
 
+  <!-- ══ TAB JURNAL ══ -->
   <div id="sectionJournal" style="display:none;">
     <h1>Performance History</h1>
     <div id="openWarning">⚠️ ADA POSISI OPEN! SELESAIKAN UNTUK REPORT.</div>
@@ -134,207 +219,614 @@ td { padding: 10px 5px; border-bottom: 1px solid rgba(128,128,128,0.05); text-al
       <div class="stat-item"><span id="statSignal" class="stat-val">0</span><span class="stat-label">Signal</span></div>
       <div class="stat-item"><span id="statProfit" class="stat-val status-profit">0</span><span class="stat-label">Win</span></div>
       <div class="stat-item"><span id="statLoss" class="stat-val status-loss">0</span><span class="stat-label">Loss</span></div>
+      <div class="stat-item"><span id="statBep" class="stat-val status-bep">0</span><span class="stat-label">BEP</span></div>
+      <div class="stat-item"><span id="statCancel" class="stat-val status-cancel">0</span><span class="stat-label">Cancel</span></div>
       <div class="stat-item"><span id="statWinrate" class="stat-val">0%</span><span class="stat-label">Winrate</span></div>
       <div class="stat-item"><span id="statPF" class="stat-val">0.0</span><span class="stat-label">PF</span></div>
-      <div class="stat-item"><span id="statGrade" class="stat-val">-</span><span class="stat-label">Quality</span></div>
       <div class="stat-item"><span id="statNet" class="stat-val">0</span><span class="stat-label">Net Pips</span></div>
+      <div class="stat-item"><span id="statGrade" class="stat-val">-</span><span class="stat-label">Quality</span></div>
     </div>
 
-    <div class="grid-3" style="background:rgba(128,128,128,0.1); padding:10px; border-radius:12px;">
-      <div class="box"><label>Tgl</label><select id="filterDay" class="form-field" onchange="window.renderJournal()"></select></div>
-      <div class="box"><label>Bulan</label><select id="filterMonth" class="form-field" onchange="window.updateDayOptions(); window.renderJournal()"><option value="0">Jan</option><option value="1">Feb</option><option value="2">Mar</option><option value="3">Apr</option><option value="4">Mei</option><option value="5">Jun</option><option value="6">Jul</option><option value="7">Agu</option><option value="8">Sep</option><option value="9">Okt</option><option value="10">Nov</option><option value="11">Des</option></select></div>
-      <div class="box"><label>Tahun</label><select id="filterYear" class="form-field" onchange="window.renderJournal()"></select></div>
+    <div class="grid-3" style="background:rgba(128,128,128,0.1);padding:10px;border-radius:12px;margin-bottom:12px;">
+      <div class="box"><label>Tgl</label><select id="filterDay" class="form-field" onchange="renderJournal()"></select></div>
+      <div class="box"><label>Bulan</label>
+        <select id="filterMonth" class="form-field" onchange="updateDayOptions();renderJournal()">
+          <option value="0">Jan</option><option value="1">Feb</option><option value="2">Mar</option>
+          <option value="3">Apr</option><option value="4">Mei</option><option value="5">Jun</option>
+          <option value="6">Jul</option><option value="7">Agu</option><option value="8">Sep</option>
+          <option value="9">Okt</option><option value="10">Nov</option><option value="11">Des</option>
+        </select>
+      </div>
+      <div class="box"><label>Tahun</label><select id="filterYear" class="form-field" onchange="renderJournal()"></select></div>
     </div>
 
-    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin: 12px 0;">
-      <button id="btnShareDaily" class="primary-btn" style="grid-column: span 2; background:#007bff; color:#fff;" onclick="shareDailySummary()">📢 SHARE DAILY REPORT</button>
-      <button class="primary-btn" style="background:#444; color:#fff; font-size:9px" onclick="exportData()">💾 EXPORT</button>
-      <button class="primary-btn" style="background:#444; color:#fff; font-size:9px" onclick="triggerImport()">📂 IMPORT</button>
-      <button class="primary-btn" style="grid-column: span 2; background:#da3633; color:#fff;" onclick="deleteFiltered()">🗑️ RESET TERFILTER</button>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+      <button class="primary-btn main" style="grid-column:span 2;" onclick="shareDailySummary()">📢 SHARE DAILY REPORT</button>
+      <button class="primary-btn" style="background:#444;color:#fff;font-size:9px" onclick="exportData()">💾 EXPORT JSON</button>
+      <button class="primary-btn" style="background:#444;color:#fff;font-size:9px" onclick="triggerImport()">📂 IMPORT JSON</button>
+      <button class="primary-btn" style="grid-column:span 2;background:#da3633;color:#fff;" onclick="deleteFiltered()">🗑️ HAPUS DATA TERFILTER</button>
     </div>
 
     <div class="table-wrapper">
       <table>
-        <thead><tr><th>Trade ID / Waktu</th><th>Pair / OP</th><th>Side</th><th>Ratio (P/L)</th><th>Kadaluarsa</th><th>Status</th><th>Aksi</th></tr></thead>
+        <thead>
+          <tr>
+            <th>Trade ID / Waktu</th>
+            <th>Pair / OP</th>
+            <th>Side</th>
+            <th>RRR (P/L Pips)</th>
+            <th>Kadaluarsa</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
         <tbody id="journalBody"></tbody>
       </table>
     </div>
   </div>
 </div>
 
+<!-- Modal Status -->
 <div id="statusModal" class="modal-overlay">
   <div class="modal-content">
-    <button class="menu-opt" onclick="updateStatus('PROFIT')" style="color:#3fb950">WIN / PROFIT</button>
-    <button class="menu-opt" onclick="updateStatus('LOSS')" style="color:#f85149">LOSS / CUTLOSS</button>
-    <button class="menu-opt" onclick="updateStatus('BEP')" style="color:#388bfd">BEP / SL+</button>
-    <button class="menu-opt" onclick="updateStatus('CANCEL')" style="color:#8b949e">CANCEL / EXPIRED</button>
-    <button class="menu-opt" onclick="deleteItem()" style="color:#f85149; font-weight:800; border-top:1px solid #333;">HAPUS PERMANEN</button>
-    <button class="menu-opt" onclick="closeModal()" style="color:#fff; background:#333">TUTUP</button>
+    <button class="menu-opt" onclick="updateStatus('PROFIT')" style="color:#3fb950">✅ WIN / PROFIT</button>
+    <button class="menu-opt" onclick="updateStatus('LOSS')" style="color:#f85149">❌ LOSS / CUTLOSS</button>
+    <button class="menu-opt" onclick="updateStatus('BEP')" style="color:#388bfd">➖ BEP / SL+</button>
+    <button class="menu-opt" onclick="updateStatus('CANCEL')" style="color:#8b949e">🚫 CANCEL / EXPIRED</button>
+    <button class="menu-opt" onclick="deleteItem()" style="color:#f85149;border-top:2px solid #333;">🗑️ HAPUS PERMANEN</button>
+    <button class="menu-opt" onclick="closeModal()" style="background:#222">✖ TUTUP</button>
   </div>
 </div>
 
-<input type="file" id="importInput" style="display:none" onchange="handleImport(event)">
+<input type="file" id="importInput" style="display:none" accept=".json" onchange="handleImport(event)"/>
 
 <script>
-const BLUEPRINT_DEFAULTS = { XAUUSD: { p: 5000.00, pips: 500 }, EURUSD: { p: 1.0850, pips: 300 }, GBPUSD: { p: 1.2650, pips: 300 }, USDJPY: { p: 150.00, pips: 400 }, AUDUSD: { p: 0.6550, pips: 200 }, EURGBP: { p: 0.8550, pips: 200 }, NZDUSD: { p: 0.6150, pips: 200 }, USDCHF: { p: 0.8850, pips: 200 }, AUDJPY: { p: 98.50, pips: 300 }, CADJPY: { p: 110.00, pips: 300 }, NZDJPY: { p: 91.50, pips: 300 }, USDCAD: { p: 1.3550, pips: 300 }, CHFJPY: { p: 170.00, pips: 400 }, EURJPY: { p: 162.50, pips: 400 }, GBPJPY: { p: 190.00, pips: 400 }, EURNZD: { p: 1.7850, pips: 400 } };
-let journal = JSON.parse(localStorage.getItem('v41-master-performance-final')) || [];
+'use strict';
+
+// ══ CONSTANTS ══
+const STORAGE_KEY = 'v41-master-performance-final';
+
+const PAIR_CONFIG = {
+  XAUUSD: { p:5000.00, pips:500, dec:2, pv:0.1 },
+  EURUSD: { p:1.0850,  pips:300, dec:5, pv:0.0001 },
+  GBPUSD: { p:1.2650,  pips:300, dec:5, pv:0.0001 },
+  AUDUSD: { p:0.6550,  pips:200, dec:5, pv:0.0001 },
+  EURGBP: { p:0.8550,  pips:200, dec:5, pv:0.0001 },
+  NZDUSD: { p:0.6150,  pips:200, dec:5, pv:0.0001 },
+  USDCHF: { p:0.8850,  pips:200, dec:5, pv:0.0001 },
+  USDCAD: { p:1.3550,  pips:300, dec:5, pv:0.0001 },
+  EURNZD: { p:1.7850,  pips:400, dec:5, pv:0.0001 },
+  USDJPY: { p:150.00,  pips:400, dec:2, pv:0.01 },
+  AUDJPY: { p:98.50,   pips:300, dec:2, pv:0.01 },
+  CADJPY: { p:110.00,  pips:300, dec:2, pv:0.01 },
+  NZDJPY: { p:91.50,   pips:300, dec:2, pv:0.01 },
+  CHFJPY: { p:170.00,  pips:400, dec:2, pv:0.01 },
+  EURJPY: { p:162.50,  pips:400, dec:2, pv:0.01 },
+  GBPJPY: { p:190.00,  pips:400, dec:2, pv:0.01 },
+};
+
+// ══ STATE ══
+let journal = [];
 let currentId = null;
 
-function formatFullTime(date) {
-    const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-    return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()} - ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')} WIB`;
+// ══ LOAD ══
+function loadJournal() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    journal = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(journal)) journal = [];
+  } catch(e) {
+    console.error('Load error:', e);
+    journal = [];
+  }
+}
+
+function saveJournal() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(journal));
+  } catch(e) {
+    console.error('Save error:', e);
+    showToast('⚠️ Gagal simpan lokal!', '#da3633');
+  }
+}
+
+// ══ HELPERS ══
+function fmt(date) {
+  const D=['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+  const M=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  const pad=n=>String(n).padStart(2,'0');
+  return `${D[date.getDay()]}, ${date.getDate()} ${M[date.getMonth()]} ${date.getFullYear()} - ${pad(date.getHours())}:${pad(date.getMinutes())} WIB`;
+}
+
+function parsePrice(str) {
+  return parseFloat(String(str).replace(',', '.')) || 0;
+}
+
+function fmtPrice(val, dec) {
+  return val.toFixed(dec).replace('.', ',');
+}
+
+function getPairConfig(pair) {
+  return PAIR_CONFIG[pair] || { p:1.0, pips:100, dec:5, pv:0.0001 };
+}
+
+function copyText(text) {
+  // Try modern clipboard API first, fall back to execCommand
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(() => execCopy(text));
+  } else {
+    execCopy(text);
+  }
+}
+
+function execCopy(text) {
+  const el = document.createElement('textarea');
+  el.value = text;
+  el.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+  document.body.appendChild(el);
+  el.focus(); el.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(el);
+}
+
+function showToast(msg, bg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = bg || '#238636';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
 }
 
 function setTheme(theme, btn) {
-    document.body.className = theme;
-    document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+  document.body.className = theme;
+  document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
 }
 
-function showToast(msg) {
-    const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2000);
+// ══ GOLDEN SUGGEST ══
+// Parse SL from "5,500.50 (-100 pips)" or "5500,50 (-100 pips)"
+function parseSlValue(slRaw) {
+  const parts = String(slRaw).trim().split(' ');
+  return parsePrice(parts[0]);
 }
 
-function getGoldenSuggest(pos, op, slRaw, d) {
-    const vOP = parseFloat(op.replace(',', '.')), vSL = parseFloat(slRaw.split(' ')[0].replace(',', '.'));
-    const range = vOP - vSL;
-    const s1 = (vSL + (range * 0.3)).toFixed(d).replace('.', ','), s2 = (vSL + (range * 0.7)).toFixed(d).replace('.', ',');
-    return (pos === 'BUY') ? `${s1} - ${s2}` : `${s2} - ${s1}`;
+function getGoldenSuggest(pos, opRaw, slRaw, dec) {
+  const vOP = parsePrice(opRaw);
+  const vSL = parseSlValue(slRaw);
+  if (!vOP || !vSL) return '-';
+  const range = Math.abs(vOP - vSL);
+  if (range === 0) return '-';
+  const s1 = (vSL + range * 0.3).toFixed(dec).replace('.', ',');
+  const s2 = (vSL + range * 0.7).toFixed(dec).replace('.', ',');
+  return pos === 'BUY' ? `${s1} – ${s2}` : `${s2} – ${s1}`;
 }
 
-window.renderJournal = function() {
-    const fD = document.getElementById('filterDay').value, fM = document.getElementById('filterMonth').value, fY = document.getElementById('filterYear').value;
-    const filtered = journal.filter(t => { const d = new Date(t.rawDate); return (d.getDate().toString() === fD) && (d.getMonth().toString() === fM) && (d.getFullYear().toString() === fY); });
-    const opens = filtered.filter(t => t.status === 'OPEN');
-    document.getElementById('openWarning').style.display = opens.length > 0 ? 'block' : 'none';
-    const wins = filtered.filter(t => t.status === 'PROFIT'), losses = filtered.filter(t => t.status === 'LOSS'), beps = filtered.filter(t => t.status === 'BEP'), cans = filtered.filter(t => t.status === 'CANCEL');
-    let winP = 0, lossP = 0; wins.forEach(w => winP += parseFloat(w.rewardPips)); losses.forEach(l => lossP += parseFloat(l.riskPips));
-    const wrVal = (wins.length + losses.length + beps.length) > 0 ? (wins.length / (wins.length + losses.length + beps.length) * 100) : 0;
-    const pfVal = lossP > 0 ? (winP / lossP) : (winP > 0 ? 99 : 0);
-    let grade = "CUKUP", gClass = "";
-    if (filtered.length > 0) {
-        if (pfVal < 1.0 || wrVal < 40) { grade = "BURUK"; gClass = "status-loss"; }
-        else if (pfVal >= 2.5 || wrVal > 70) { grade = "MANTAP"; gClass = "status-profit"; }
-        else if (pfVal >= 1.5 || wrVal > 55) { grade = "BAIK"; gClass = "status-profit"; }
-    } else grade = "-";
-    document.getElementById('statSignal').textContent = filtered.length;
-    document.getElementById('statProfit').textContent = wins.length;
-    document.getElementById('statLoss').textContent = losses.length;
-    document.getElementById('statWinrate').textContent = wrVal.toFixed(1) + '%';
-    document.getElementById('statPF').textContent = pfVal === 99 ? 'MAX' : pfVal.toFixed(2);
-    document.getElementById('statNet').textContent = (winP - lossP).toFixed(1);
-    const gEl = document.getElementById('statGrade'); gEl.textContent = grade; gEl.className = 'stat-val ' + gClass;
-    document.getElementById('journalBody').innerHTML = filtered.map(t => `
-        <tr>
-            <td><b>${t.tradeId}</b><span class="full-date">${t.dateDisplay}</span></td>
-            <td><b>${t.pair}</b><br><small>OP: ${t.op}</small></td>
-            <td><span class="badge ${t.pos === 'BUY' ? 'bg-buy' : 'bg-sell'}">${t.pos}</span></td>
-            <td><b>1:${t.rrr}</b><br><small>+${t.rewardPips}</small></td>
-            <td><span class="full-date">${t.expiryDisplay}</span></td>
-            <td class="status-${t.status.toLowerCase()}"><b>${t.status}</b></td>
-            <td><button onclick="copyJournalRow('${t.id}')">📋</button><button onclick="openModal('${t.id}')">⚙️</button></td>
-        </tr>`).join('');
-};
+// ══ CALCULATOR LOGIC ══
+function calcValues() {
+  const cfg    = getPairConfig(document.getElementById('pair').value);
+  const pos    = document.getElementById('position').value;
+  const vOP    = parsePrice(document.getElementById('op').value);
+  const pips   = parseFloat(document.getElementById('tpPips').value) || 0;
+  const rrr    = Math.max(0.1, parseFloat(document.getElementById('rrr').value) || 1);
 
-window.shareDailySummary = function() {
-  if(document.getElementById('openWarning').style.display === 'block') return alert("Selesaikan trade OPEN.");
-  const fD = document.getElementById('filterDay').value, fM = document.getElementById('filterMonth').value, fY = document.getElementById('filterYear').value;
-  const filtered = journal.filter(t => { const d = new Date(t.rawDate); return (d.getDate().toString() === fD) && (d.getMonth().toString() === fM) && (d.getFullYear().toString() === fY); });
-  if(filtered.length === 0) return alert("Data kosong.");
-  const wins = filtered.filter(t => t.status === 'PROFIT'), losses = filtered.filter(t => t.status === 'LOSS'), beps = filtered.filter(t => t.status === 'BEP'), cans = filtered.filter(t => t.status === 'CANCEL');
-  let winP = 0, lossP = 0; wins.forEach(w => winP += parseFloat(w.rewardPips)); losses.forEach(l => lossP += parseFloat(l.riskPips));
-  const net = (winP - lossP).toFixed(1);
-  const text = `📊 DAILY PERFORMANCE REPORT
-Tanggal: ${fD}/${parseInt(fM)+1}/${fY}
--------------------------------
-TOTAL SIGNAL  : ${filtered.length} ✅
-WIN / PROFIT  : ${wins.length}
-LOSS / RISK   : ${losses.length}
-BEP / SL+      : ${beps.length}
-CANCEL/EXPRD  : ${cans.length}
--------------------------------
-NET PIPS      : ${net > 0 ? '+' + net : net}
-WIN RATE      : ${document.getElementById('statWinrate').innerText}
-PROFIT FACTOR : ${document.getElementById('statPF').innerText}
-QUALITY       : ${document.getElementById('statGrade').innerText}
--------------------------------
-Tips me  
-https://forexemas.myr.id/support
--------------------------------
+  const errEl = document.getElementById('calcError');
+
+  if (!vOP || vOP <= 0) {
+    errEl.textContent = '⚠️ Entry Price tidak valid.';
+    errEl.style.display = 'block';
+    document.getElementById('op').classList.add('invalid');
+    return null;
+  }
+  if (pips <= 0) {
+    errEl.textContent = '⚠️ TP Pips harus lebih dari 0.';
+    errEl.style.display = 'block';
+    document.getElementById('tpPips').classList.add('invalid');
+    return null;
+  }
+  errEl.style.display = 'none';
+  document.getElementById('op').classList.remove('invalid');
+  document.getElementById('tpPips').classList.remove('invalid');
+
+  const riskPips = pips / rrr;
+  const vTP = pos === 'BUY' ? vOP + pips * cfg.pv : vOP - pips * cfg.pv;
+  const vSL = pos === 'BUY' ? vOP - riskPips * cfg.pv : vOP + riskPips * cfg.pv;
+
+  return { vOP, vTP, vSL, pips, riskPips, rrr, cfg };
+}
+
+function updateAll() {
+  const res = calcValues();
+  const pair = document.getElementById('pair').value;
+  const cfg = getPairConfig(pair);
+  const dec = cfg.dec;
+
+  if (!res) {
+    document.getElementById('slInfo').value = '';
+    document.getElementById('tp').value = '';
+    document.getElementById('previewBody').innerHTML = '<tr><td colspan="7" style="opacity:0.3;padding:16px;">Data tidak valid</td></tr>';
+    return;
+  }
+
+  const slDisplay = `${fmtPrice(res.vSL, dec)} (-${res.riskPips.toFixed(1)} pips)`;
+  document.getElementById('slInfo').value = slDisplay;
+  document.getElementById('tp').value = fmtPrice(res.vTP, dec);
+  document.getElementById('previewBody').innerHTML = `
+    <tr>
+      <td><b>${pair}</b></td>
+      <td><span class="badge ${document.getElementById('position').value === 'BUY' ? 'bg-buy' : 'bg-sell'}">${document.getElementById('position').value}</span></td>
+      <td>${fmtPrice(res.vOP, dec)}</td>
+      <td style="color:#f85149">${fmtPrice(res.vSL, dec)}</td>
+      <td style="color:#3fb950">${fmtPrice(res.vTP, dec)}</td>
+      <td>1:${res.rrr}</td>
+      <td style="color:#f85149">-${res.riskPips.toFixed(1)}</td>
+    </tr>`;
+}
+
+// ══ TAB SWITCH ══
+function switchTab(tab) {
+  const isCalc = tab === 'calc';
+  document.getElementById('sectionCalc').style.display   = isCalc ? 'block' : 'none';
+  document.getElementById('sectionJournal').style.display= isCalc ? 'none'  : 'block';
+  document.getElementById('btnTabCalc').classList.toggle('active', isCalc);
+  document.getElementById('btnTabJournal').classList.toggle('active', !isCalc);
+  if (!isCalc) renderJournal();
+}
+
+// ══ COPY CAPTION ══
+function buildCaptionText(data, isPreview) {
+  const cfg = getPairConfig(data.pair);
+  const golden = getGoldenSuggest(data.pos, data.op, data.sl, cfg.dec);
+  const statusText = (data.status === 'OPEN' || data.status === 'PENDING') ? 'OPEN / PENDING' : data.status;
+  return `Trade [${data.tradeId}] ${data.stars}
+Pair   : ${data.pair} (${data.pos})
+Entry  : ${data.op}
+Golden : ${golden}
+SL     : ${data.sl}
+TP     : ${data.tp} (+${parseFloat(data.rewardPips).toFixed(1)} pips)
+RRR    : 1:${data.rrr}
+Alasan : ${data.reason || '-'}
+──────────────────
+Terbit  : ${data.dateDisplay}
+Expired : ${data.expiryDisplay}
+Hasil   : ${statusText}
+──────────────────
 Generated by V41 FOREXEMAS`;
-  navigator.clipboard.writeText(text).then(() => showToast("Daily Report Disalin!"));
-};
+}
 
-window.copyJournalRow = function(id, manualData = null) {
-    const t = manualData || journal.find(item => item.id == id);
-    if (!t) return;
-    const dec = (t.pair === 'XAUUSD' || t.pair.includes('JPY')) ? 2 : 5;
-    const statusText = (t.status === 'OPEN' || t.status === 'PENDING') ? 'OPEN' : t.status;
-    const text = `Trade [${t.tradeId}] ${t.stars}\nPair: ${t.pair} (${t.pos})\nEntry: ${t.op}\nGolden: ${getGoldenSuggest(t.pos, t.op, t.sl, dec)}\nSL: ${t.sl}\nTP: ${t.tp} (+${t.rewardPips} pips)\nRRR: 1:${t.rrr}\nAlasan: ${t.reason || '-'}\n------------------\nTerbit: ${t.dateDisplay}\nExpired: ${t.expiryDisplay}\nHasil: ${statusText}\nGenerated by V41 FOREXEMAS`;
-    navigator.clipboard.writeText(text).then(() => showToast("Sinyal Disalin!"));
-};
+function copyJournalRow(id, manualData) {
+  const t = manualData || journal.find(item => String(item.id) === String(id));
+  if (!t) { showToast('❌ Data tidak ditemukan', '#da3633'); return; }
+  copyText(buildCaptionText(t, !!manualData));
+  showToast('📋 Sinyal Disalin!');
+}
 
-window.saveAndRender = () => { localStorage.setItem('v41-master-performance-final', JSON.stringify(journal)); window.renderJournal(); };
-window.updateDayOptions = () => {
-    const fM = document.getElementById('filterMonth').value, fY = document.getElementById('filterYear').value, selDay = document.getElementById('filterDay');
-    const today = new Date(); const year = fY === '' ? today.getFullYear() : parseInt(fY);
-    const days = new Date(year, parseInt(fM) + 1, 0).getDate();
-    let html = ''; for(let i=1; i<=days; i++) html += `<option value="${i}">${i}</option>`;
-    selDay.innerHTML = html; selDay.value = today.getDate();
-};
+// ══ SAVE & RENDER ══
+function saveAndRender() {
+  saveJournal();
+  renderJournal();
+}
 
-window.openModal = (id) => { currentId = id; document.getElementById('statusModal').style.display = 'flex'; };
-window.closeModal = () => { document.getElementById('statusModal').style.display = 'none'; };
-window.updateStatus = (s) => { journal = journal.map(t => t.id == currentId ? {...t, status: s} : t); window.saveAndRender(); window.closeModal(); };
-window.deleteItem = () => { if(confirm("Hapus trade?")) { journal = journal.filter(t => t.id != currentId); window.saveAndRender(); window.closeModal(); } };
-window.deleteFiltered = () => { if(confirm("Hapus data terfilter?")) { const d=document.getElementById('filterDay').value, m=document.getElementById('filterMonth').value, y=document.getElementById('filterYear').value; journal = journal.filter(t => { const dt = new Date(t.rawDate); return !((dt.getDate().toString() === d) && (dt.getMonth().toString() === m) && (dt.getFullYear().toString() === y)); }); window.saveAndRender(); } };
-window.exportData = () => { const blob = new Blob([JSON.stringify(journal, null, 2)], {type:"application/json"}); const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`V41_Backup.json`; a.click(); };
-window.triggerImport = () => document.getElementById('importInput').click();
-window.handleImport = (e) => { const reader = new FileReader(); reader.onload=(ev)=>{ try{journal=JSON.parse(ev.target.result); window.saveAndRender(); showToast("Import Sukses!");}catch(e){alert("Error!");} }; reader.readAsText(e.target.files[0]); };
+// ══ RENDER JOURNAL ══
+function renderJournal() {
+  const fD = document.getElementById('filterDay').value;
+  const fM = document.getElementById('filterMonth').value;
+  const fY = document.getElementById('filterYear').value;
 
-document.addEventListener('DOMContentLoaded', () => {
-    const el = { op: document.getElementById('op'), slInfo: document.getElementById('slInfo'), tp: document.getElementById('tp'), rrr: document.getElementById('rrr'), tpPips: document.getElementById('tpPips'), pair: document.getElementById('pair'), pos: document.getElementById('position'), stars: document.getElementById('starOption'), reason: document.getElementById('entryReason'), expiry: document.getElementById('customExpiry'), fDay: document.getElementById('filterDay'), fMonth: document.getElementById('filterMonth'), fYear: document.getElementById('filterYear') };
-    const today = new Date(); el.fMonth.value = today.getMonth();
-    const yrs = [...new Set([today.getFullYear(), ...journal.map(t => new Date(t.rawDate).getFullYear())])];
-    el.fYear.innerHTML = yrs.map(y => `<option value="${y}">${y}</option>`).join('');
-    el.fYear.value = today.getFullYear();
-    window.updateDayOptions();
+  const filtered = journal.filter(t => {
+    const d = new Date(t.rawDate);
+    return (
+      d.getDate()     === parseInt(fD) &&
+      d.getMonth()    === parseInt(fM) &&
+      d.getFullYear() === parseInt(fY)
+    );
+  });
 
-    function updateAll() {
-        const p = el.pair.value, pv = p === 'XAUUSD' ? 0.1 : (p.includes('JPY') ? 0.01 : 0.0001), d = (p === 'XAUUSD' || p.includes('JPY')) ? 2 : 5;
-        let vOP = parseFloat(el.op.value.replace(',', '.')) || 0;
-        let pips = parseFloat(el.tpPips.value) || 0, mult = parseFloat(el.rrr.value) || 1;
-        const riskVal = (pips / mult).toFixed(1), vTP = el.pos.value === 'buy' ? vOP + (pips * pv) : vOP - (pips * pv), vSL = el.pos.value === 'buy' ? vOP - (riskVal * pv) : vOP + (riskVal * pv);
-        el.tp.value = vTP.toFixed(d).replace('.', ',');
-        el.slInfo.value = `${vSL.toFixed(d).replace('.', ',')} (-${riskVal} pips)`;
-        document.getElementById('previewBody').innerHTML = `<tr><td>${p}</td><td>${el.pos.value.toUpperCase()}</td><td>${vOP.toFixed(d).replace('.', ',')}</td><td>${vSL.toFixed(d).replace('.', ',')}</td><td>${el.tp.value}</td><td>1:${mult}</td></tr>`;
+  const opens   = filtered.filter(t => t.status === 'OPEN');
+  const wins    = filtered.filter(t => t.status === 'PROFIT');
+  const losses  = filtered.filter(t => t.status === 'LOSS');
+  const beps    = filtered.filter(t => t.status === 'BEP');
+  const cans    = filtered.filter(t => t.status === 'CANCEL');
+
+  document.getElementById('openWarning').style.display = opens.length > 0 ? 'block' : 'none';
+
+  let winP = 0, lossP = 0;
+  wins.forEach(w   => { winP  += parseFloat(w.rewardPips) || 0; });
+  losses.forEach(l => { lossP += parseFloat(l.riskPips)   || 0; });
+
+  const closedCount = wins.length + losses.length + beps.length;
+  const wrVal = closedCount > 0 ? (wins.length / closedCount * 100) : 0;
+  const pfVal = lossP > 0 ? winP / lossP : (winP > 0 ? 99 : 0);
+  const netPips = winP - lossP;
+
+  let grade = '-', gClass = '';
+  if (filtered.length > 0) {
+    if      (pfVal < 1.0  || wrVal < 40) { grade = 'BURUK';  gClass = 'status-loss';   }
+    else if (pfVal >= 2.5 || wrVal > 70) { grade = 'MANTAP'; gClass = 'status-profit'; }
+    else if (pfVal >= 1.5 || wrVal > 55) { grade = 'BAIK';   gClass = 'status-profit'; }
+    else                                  { grade = 'CUKUP';  gClass = '';              }
+  }
+
+  document.getElementById('statSignal').textContent = filtered.length;
+  document.getElementById('statProfit').textContent = wins.length;
+  document.getElementById('statLoss').textContent   = losses.length;
+  document.getElementById('statBep').textContent    = beps.length;
+  document.getElementById('statCancel').textContent = cans.length;
+  document.getElementById('statWinrate').textContent= wrVal.toFixed(1) + '%';
+  document.getElementById('statPF').textContent     = pfVal >= 99 ? 'MAX' : pfVal.toFixed(2);
+  document.getElementById('statNet').textContent    = (netPips >= 0 ? '+' : '') + netPips.toFixed(1);
+  document.getElementById('statNet').className      = 'stat-val ' + (netPips >= 0 ? 'status-profit' : 'status-loss');
+  const gEl = document.getElementById('statGrade');
+  gEl.textContent = grade; gEl.className = 'stat-val ' + gClass;
+
+  const statusClassMap = {
+    PROFIT:'status-profit', LOSS:'status-loss', OPEN:'status-open',
+    PENDING:'status-pending', BEP:'status-bep', CANCEL:'status-cancel'
+  };
+
+  document.getElementById('journalBody').innerHTML = filtered.length === 0
+    ? '<tr><td colspan="7" style="opacity:0.3;padding:20px;text-align:center;">Tidak ada data pada tanggal ini</td></tr>'
+    : filtered.map(t => `
+      <tr>
+        <td><b style="font-size:9px">${t.tradeId}</b><span class="full-date">${t.dateDisplay}</span></td>
+        <td><b>${t.pair}</b><br><small style="opacity:0.6">OP: ${t.op}</small></td>
+        <td><span class="badge ${t.pos === 'BUY' ? 'bg-buy' : 'bg-sell'}">${t.pos}</span></td>
+        <td><b>1:${t.rrr}</b><br><small class="status-profit">+${parseFloat(t.rewardPips).toFixed(1)}</small> / <small class="status-loss">-${parseFloat(t.riskPips).toFixed(1)}</small></td>
+        <td><span class="full-date" style="font-size:8px">${t.expiryDisplay}</span></td>
+        <td class="${statusClassMap[t.status] || ''}"><b>${t.status}</b></td>
+        <td>
+          <button onclick="copyJournalRow('${t.id}')" title="Copy">📋</button>
+          <button onclick="openModal('${t.id}')" title="Update Status">⚙️</button>
+        </td>
+      </tr>`).join('');
+}
+
+// ══ SHARE DAILY ══
+function shareDailySummary() {
+  if (document.getElementById('openWarning').style.display === 'block') {
+    showToast('⚠️ Selesaikan trade OPEN dulu!', '#f0a030');
+    return;
+  }
+  const fD = document.getElementById('filterDay').value;
+  const fM = document.getElementById('filterMonth').value;
+  const fY = document.getElementById('filterYear').value;
+
+  const filtered = journal.filter(t => {
+    const d = new Date(t.rawDate);
+    return d.getDate() === parseInt(fD) && d.getMonth() === parseInt(fM) && d.getFullYear() === parseInt(fY);
+  });
+
+  if (filtered.length === 0) { showToast('❌ Tidak ada data hari ini', '#da3633'); return; }
+
+  const wins   = filtered.filter(t => t.status === 'PROFIT');
+  const losses = filtered.filter(t => t.status === 'LOSS');
+  const beps   = filtered.filter(t => t.status === 'BEP');
+  const cans   = filtered.filter(t => t.status === 'CANCEL');
+
+  let winP = 0, lossP = 0;
+  wins.forEach(w   => { winP  += parseFloat(w.rewardPips) || 0; });
+  losses.forEach(l => { lossP += parseFloat(l.riskPips)   || 0; });
+
+  const netPips  = winP - lossP;
+  const netStr   = (netPips >= 0 ? '+' : '') + netPips.toFixed(1);
+  const wrEl     = document.getElementById('statWinrate').textContent;
+  const pfEl     = document.getElementById('statPF').textContent;
+  const gradeEl  = document.getElementById('statGrade').textContent;
+  const months   = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  const dateStr  = `${fD} ${months[parseInt(fM)]} ${fY}`;
+
+  const text = `📊 DAILY PERFORMANCE REPORT
+Tanggal : ${dateStr}
+─────────────────────────
+TOTAL SIGNAL  : ${filtered.length}
+WIN / PROFIT  : ${wins.length} ✅
+LOSS          : ${losses.length} ❌
+BEP / SL+     : ${beps.length} ➖
+CANCEL        : ${cans.length} 🚫
+─────────────────────────
+NET PIPS      : ${netStr}
+WIN RATE      : ${wrEl}
+PROFIT FACTOR : ${pfEl}
+QUALITY       : ${gradeEl}
+─────────────────────────
+Generated by V41 FOREXEMAS`;
+
+  copyText(text);
+  showToast('📢 Daily Report Disalin!');
+}
+
+// ══ DATE FILTER ══
+function updateDayOptions() {
+  const fM  = parseInt(document.getElementById('filterMonth').value);
+  const fY  = parseInt(document.getElementById('filterYear').value) || new Date().getFullYear();
+  const days= new Date(fY, fM + 1, 0).getDate();
+  const sel = document.getElementById('filterDay');
+  const cur = parseInt(sel.value);
+  let html  = '';
+  for (let i = 1; i <= days; i++) html += `<option value="${i}"${i===cur?' selected':''}>${i}</option>`;
+  sel.innerHTML = html;
+  if (!cur || cur > days) sel.value = Math.min(cur || new Date().getDate(), days);
+}
+
+// ══ MODAL ══
+function openModal(id) {
+  currentId = id;
+  document.getElementById('statusModal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('statusModal').classList.remove('open');
+}
+function updateStatus(s) {
+  journal = journal.map(t => String(t.id) === String(currentId) ? {...t, status: s} : t);
+  saveAndRender();
+  closeModal();
+  showToast('✅ Status diperbarui!');
+}
+function deleteItem() {
+  if (!confirm('Hapus trade ini secara permanen?')) return;
+  journal = journal.filter(t => String(t.id) !== String(currentId));
+  saveAndRender();
+  closeModal();
+  showToast('🗑️ Trade dihapus', '#da3633');
+}
+
+// ══ EXPORT / IMPORT ══
+function exportData() {
+  const blob = new Blob([JSON.stringify(journal, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `V41_Backup_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+function triggerImport() { document.getElementById('importInput').click(); }
+function handleImport(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const parsed = JSON.parse(ev.target.result);
+      if (!Array.isArray(parsed)) throw new Error('Bukan array');
+      journal = parsed;
+      saveAndRender();
+      showToast('📂 Import Sukses! ' + parsed.length + ' trades');
+    } catch(err) {
+      showToast('❌ File tidak valid!', '#da3633');
     }
+  };
+  reader.readAsText(file);
+  e.target.value = ''; // reset so same file can be reimported
+}
+function deleteFiltered() {
+  if (!confirm('Hapus semua data pada tanggal yang terfilter?')) return;
+  const fD = parseInt(document.getElementById('filterDay').value);
+  const fM = parseInt(document.getElementById('filterMonth').value);
+  const fY = parseInt(document.getElementById('filterYear').value);
+  journal = journal.filter(t => {
+    const d = new Date(t.rawDate);
+    return !(d.getDate() === fD && d.getMonth() === fM && d.getFullYear() === fY);
+  });
+  saveAndRender();
+  showToast('🗑️ Data terfilter dihapus', '#da3633');
+}
 
-    el.op.onblur = () => { const p = el.pair.value, d = (p === 'XAUUSD' || p.includes('JPY')) ? 2 : 5; let val = parseFloat(el.op.value.replace(',', '.')) || 0; el.op.value = val.toFixed(d).replace('.', ','); updateAll(); };
-    el.pair.onchange = () => { const p = el.pair.value, d = (p === 'XAUUSD' || p.includes('JPY')) ? 2 : 5; el.op.value = BLUEPRINT_DEFAULTS[p].p.toFixed(d).replace('.', ','); updateAll(); };
-    document.getElementById('btnTabCalc').onclick = () => { document.getElementById('sectionCalc').style.display='block'; document.getElementById('sectionJournal').style.display='none'; document.getElementById('btnTabCalc').classList.add('active'); document.getElementById('btnTabJournal').classList.remove('active'); };
-    document.getElementById('btnTabJournal').onclick = () => { document.getElementById('sectionCalc').style.display='none'; document.getElementById('sectionJournal').style.display='block'; document.getElementById('btnTabJournal').classList.add('active'); document.getElementById('btnTabCalc').classList.remove('active'); window.renderJournal(); };
-    
-    document.getElementById('saveJournalBtn').onclick = () => {
-        const p = el.pair.value, d = (p === 'XAUUSD' || p.includes('JPY')) ? 2 : 5;
-        let finalOP = parseFloat(el.op.value.replace(',', '.')).toFixed(d).replace('.', ',');
-        const now = new Date(), exp = new Date(now.getTime() + (el.expiry.value * 3600000));
-        const data = { id: Date.now(), tradeId: "TRX-"+Math.floor(100000+Math.random()*900000), rawDate: now.toISOString(), dateDisplay: formatFullTime(now), expiryDisplay: formatFullTime(exp), pair: el.pair.value, pos: el.pos.value.toUpperCase(), rrr: el.rrr.value, op: finalOP, tp: el.tp.value, sl: el.slInfo.value, rewardPips: el.tpPips.value, riskPips: (el.tpPips.value/el.rrr.value).toFixed(1), status: 'OPEN', stars: el.stars.value, reason: el.reason.value };
-        journal.unshift(data); window.saveAndRender(); window.copyJournalRow(data.id);
-    };
+// ══ INIT ══
+document.addEventListener('DOMContentLoaded', () => {
+  loadJournal();
 
-    document.getElementById('copyOnlyBtn').onclick = () => {
-        const p = el.pair.value, d = (p === 'XAUUSD' || p.includes('JPY')) ? 2 : 5;
-        let finalOP = parseFloat(el.op.value.replace(',', '.')).toFixed(d).replace('.', ',');
-        const now = new Date(), exp = new Date(now.getTime() + (el.expiry.value * 3600000));
-        const temp = { tradeId: "PREVIEW", stars: el.stars.value, pair: el.pair.value, pos: el.pos.value.toUpperCase(), op: finalOP, sl: el.slInfo.value, tp: el.tp.value, rewardPips: el.tpPips.value, rrr: el.rrr.value, reason: el.reason.value, dateDisplay: formatFullTime(now), expiryDisplay: formatFullTime(exp), status: 'PENDING' };
-        window.copyJournalRow(null, temp);
-    };
+  // Element refs
+  const elOp     = document.getElementById('op');
+  const elPair   = document.getElementById('pair');
+  const elPos    = document.getElementById('position');
+  const elPips   = document.getElementById('tpPips');
+  const elRrr    = document.getElementById('rrr');
+  const elReason = document.getElementById('entryReason');
+  const elExpiry = document.getElementById('customExpiry');
+  const elStars  = document.getElementById('starOption');
 
-    [el.op, el.tpPips, el.rrr, el.pos].forEach(i => i.oninput = updateAll);
+  // Init date filter
+  const today = new Date();
+  document.getElementById('filterMonth').value = today.getMonth();
+
+  // Build year options from journal + current
+  const years = [...new Set([today.getFullYear(), ...journal.map(t => new Date(t.rawDate).getFullYear())])].sort((a,b)=>b-a);
+  document.getElementById('filterYear').innerHTML = years.map(y => `<option value="${y}">${y}</option>`).join('');
+  document.getElementById('filterYear').value = today.getFullYear();
+  updateDayOptions();
+
+  // Set default entry price from pair config
+  const initCfg = getPairConfig(elPair.value);
+  elOp.value = fmtPrice(initCfg.p, initCfg.dec);
+  elPips.value = initCfg.pips;
+  updateAll();
+
+  // Listeners
+  elOp.addEventListener('input', updateAll);
+  elOp.addEventListener('blur', () => {
+    const cfg = getPairConfig(elPair.value);
+    const val = parsePrice(elOp.value);
+    if (val > 0) elOp.value = fmtPrice(val, cfg.dec);
     updateAll();
+  });
+  elPair.addEventListener('change', () => {
+    const cfg = getPairConfig(elPair.value);
+    elOp.value  = fmtPrice(cfg.p, cfg.dec);
+    elPips.value= cfg.pips;
+    updateAll();
+  });
+  elPos.addEventListener('change', updateAll);
+  elPips.addEventListener('input', updateAll);
+  elRrr.addEventListener('input', updateAll);
+
+  // Save to journal
+  document.getElementById('saveJournalBtn').addEventListener('click', () => {
+    const res = calcValues();
+    if (!res) return;
+
+    const cfg    = getPairConfig(elPair.value);
+    const now    = new Date();
+    const exp    = new Date(now.getTime() + (parseFloat(elExpiry.value) || 2) * 3600000);
+    const slStr  = document.getElementById('slInfo').value;
+    const tpStr  = document.getElementById('tp').value;
+    const pos    = elPos.value;
+
+    const data = {
+      id:            Date.now(),
+      tradeId:       'TRX-' + Math.floor(100000 + Math.random() * 900000),
+      rawDate:       now.toISOString(),
+      dateDisplay:   fmt(now),
+      expiryDisplay: fmt(exp),
+      pair:          elPair.value,
+      pos:           pos,
+      rrr:           elRrr.value,
+      op:            fmtPrice(res.vOP, cfg.dec),
+      tp:            tpStr,
+      sl:            slStr,
+      rewardPips:    res.pips.toFixed(1),
+      riskPips:      res.riskPips.toFixed(1),
+      status:        'OPEN',
+      stars:         elStars.value,
+      reason:        elReason.value.trim(),
+    };
+
+    journal.unshift(data);
+    saveJournal();
+    copyJournalRow(null, data);
+    showToast('💾 Tersimpan & Disalin!');
+  });
+
+  // Copy only (no save)
+  document.getElementById('copyOnlyBtn').addEventListener('click', () => {
+    const res = calcValues();
+    if (!res) return;
+
+    const cfg = getPairConfig(elPair.value);
+    const now = new Date();
+    const exp = new Date(now.getTime() + (parseFloat(elExpiry.value) || 2) * 3600000);
+
+    const temp = {
+      tradeId:       'PREVIEW',
+      stars:         elStars.value,
+      pair:          elPair.value,
+      pos:           elPos.value,
+      op:            fmtPrice(res.vOP, cfg.dec),
+      sl:            document.getElementById('slInfo').value,
+      tp:            document.getElementById('tp').value,
+      rewardPips:    res.pips.toFixed(1),
+      riskPips:      res.riskPips.toFixed(1),
+      rrr:           elRrr.value,
+      reason:        elReason.value.trim(),
+      dateDisplay:   fmt(now),
+      expiryDisplay: fmt(exp),
+      status:        'PENDING',
+    };
+    copyJournalRow(null, temp);
+  });
+
+  // Close modal on overlay click
+  document.getElementById('statusModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
 });
 </script>
 </body>
